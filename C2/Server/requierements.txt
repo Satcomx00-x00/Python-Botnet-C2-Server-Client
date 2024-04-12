@@ -1,7 +1,6 @@
 irc3
 sockets
 pydle
-random
 pypsrp
 requests
 torrequest

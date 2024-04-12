@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
 import pydle
 from requests import get
 from multiprocessing import Process
@@ -9,8 +11,6 @@ import requests
 import platform
 import logging
 
-#!/usr/bin/python3
-# -*- coding: utf-8 -*-
 
 logging.basicConfig(level=logging.ERROR)
 
