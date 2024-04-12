@@ -12,3 +12,8 @@ Python3 Dependencies : </br>
 Server Needs : </br>
   ``sudo apt install irssi tor python3 python-pip inspircd``</br>
   ``pip3 install -r requierements.txt``</br>
+
+
+
+## TODO
+- [] mettre un procéder pour envoyé des commandes en fonction de l'OS cible (diff entre PS,BASH,SH)
