@@ -3,12 +3,13 @@
 import socket
 import threading
 
+
 class DialogueTCP(threading.Thread):
     def __init__(self, client, infos):
         threading.Thread.__init__(self)
         self.client = client
         self.infos = infos
-    
+
     def run(self):
         print("connexion établie avec ", self.infos)
         message = ""
@@ -22,23 +23,20 @@ class DialogueTCP(threading.Thread):
 def main():
     connexions = []
     serveur = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    hote = ''
+    hote = ""
     print(hote)
     port = 5005
-    serveur.bind((hote,port))
+    serveur.bind((hote, port))
     print("Serveur en attente de connexion")
     serveur.listen(5)
-    while(True):
-        client,infos = serveur.accept()
+    while True:
+        client, infos = serveur.accept()
         connexions.append(DialogueTCP(client, infos))
         connexions[-1].start()
     for th in connexions:
         th.join()
     serveur.close()
 
+
 if __name__ == "__main__":
     main()
-
-
-    
-

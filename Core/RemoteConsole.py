@@ -4,8 +4,9 @@ import os, sys, time
 
 
 def template():
-    os.system('clear')
-    print("""
+    os.system("clear")
+    print(
+        """
                                     `:oDFo:`                            
                                 ./ymM0dayMmy/.                          
                             -+dHJ5aGFyZGVyIQ==+-                    
@@ -39,13 +40,16 @@ def template():
                                     .esc:wq!:`                        
                                         +++ATH`                            
                                         `
-    """)
+    """
+    )
     time.sleep(2)
-    os.system('clear')
+    os.system("clear")
+
 
 def main():
     template()
     os.system("irssi --connect=localhost")
+
 
 if __name__ == "__main__":
     main()

