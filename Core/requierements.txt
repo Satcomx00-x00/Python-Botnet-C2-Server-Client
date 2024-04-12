@@ -1,0 +1,8 @@
+irc3
+multiprocessing
+socket
+pydle
+requests
+threading
+random
+pypsrp
