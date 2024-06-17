@@ -5,4 +5,3 @@ pyscreenshot
 pycryptodome
 pyxhook
 tendo
-
