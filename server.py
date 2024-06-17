@@ -1,6 +1,7 @@
 import socket
 from aes_crypt import AESCipher
 from base64 import b64encode, b64decode
+import os
 
 
 class ReverseShellServer:
