@@ -1,7 +1,0 @@
-irc3
-sockets
-pydle
-pypsrp
-requests
-torrequest
-stem

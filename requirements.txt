@@ -1,0 +1,7 @@
+Pillow
+pyperclip
+opencv-python
+pyscreenshot
+pycryptodome
+pyxhook
+tendo
