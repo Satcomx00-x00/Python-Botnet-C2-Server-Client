@@ -4,7 +4,7 @@ import os
 import sys
 from aes_crypt import AESCipher
 from time import sleep
-from base64 import b64encode
+from base64 import b64encode, b64decode
 from PIL import ImageGrab
 import platform
 import datetime

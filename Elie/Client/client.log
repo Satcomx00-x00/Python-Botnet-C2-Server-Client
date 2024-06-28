@@ -1,0 +1,108 @@
+2024-06-28 18:26:05,939 - INFO - Attempting to connect to server...
+2024-06-28 18:26:05,939 - INFO - Connected to server
+2024-06-28 18:26:05,939 - INFO - Sent client info: adc98f0cc4ea|Linux
+2024-06-28 18:26:08,340 - INFO - Received command: ipconfig
+2024-06-28 18:26:08,340 - INFO - Handling ipconfig
+2024-06-28 18:26:08,342 - INFO - Command output: 172.17.0.5
+
+2024-06-28 18:26:08,342 - INFO - ipconfig result: 172.17.0.5
+
+2024-06-28 18:26:08,342 - INFO - ipconfig handled successfully
+2024-06-28 18:27:13,327 - INFO - Connection closed
+2024-06-28 18:27:15,504 - INFO - Attempting to connect to server...
+2024-06-28 18:27:15,504 - INFO - Connected to server
+2024-06-28 18:27:15,504 - INFO - Sent client info: adc98f0cc4ea|Linux
+2024-06-28 18:27:17,667 - INFO - Received command: ipconfig
+2024-06-28 18:27:17,667 - INFO - Handling ipconfig
+2024-06-28 18:27:17,669 - INFO - Command output: 172.17.0.5
+
+2024-06-28 18:27:17,669 - INFO - ipconfig result: 172.17.0.5
+
+2024-06-28 18:27:17,669 - INFO - ipconfig handled successfully
+2024-06-28 18:28:12,527 - INFO - Connection closed
+2024-06-28 18:28:14,967 - INFO - Attempting to connect to server...
+2024-06-28 18:28:14,967 - INFO - Connected to server
+2024-06-28 18:28:14,967 - INFO - Sent client info: adc98f0cc4ea|Linux
+2024-06-28 18:28:18,545 - INFO - Received command: ipconfig
+2024-06-28 18:28:18,545 - INFO - Handling ipconfig
+2024-06-28 18:28:18,546 - INFO - Command output: 172.17.0.5
+
+2024-06-28 18:28:18,547 - INFO - ipconfig result: 172.17.0.5
+
+2024-06-28 18:28:18,547 - INFO - ipconfig handled successfully
+2024-06-28 18:28:18,547 - INFO - Connection closed
+2024-06-28 18:28:18,547 - INFO - Attempting to connect to server...
+2024-06-28 18:28:18,547 - INFO - Connected to server
+2024-06-28 18:28:18,547 - INFO - Sent client info: adc98f0cc4ea|Linux
+2024-06-28 18:28:51,516 - INFO - Connection closed
+2024-06-28 18:28:51,516 - INFO - Attempting to connect to server...
+2024-06-28 18:28:51,516 - ERROR - Connection error: [Errno 111] Connection refused
+2024-06-28 18:28:54,647 - INFO - Attempting to connect to server...
+2024-06-28 18:28:54,647 - INFO - Connected to server
+2024-06-28 18:28:54,647 - INFO - Sent client info: adc98f0cc4ea|Linux
+2024-06-28 18:28:57,158 - INFO - Received command: ipconfig
+2024-06-28 18:28:57,158 - INFO - Handling ipconfig
+2024-06-28 18:28:57,159 - INFO - Command output: 172.17.0.5
+
+2024-06-28 18:28:57,160 - INFO - ipconfig result: 172.17.0.5
+
+2024-06-28 18:28:57,160 - INFO - ipconfig handled successfully
+2024-06-28 18:30:29,461 - INFO - Connection closed
+2024-06-28 18:30:31,569 - INFO - Attempting to connect to server...
+2024-06-28 18:30:31,569 - INFO - Connected to server
+2024-06-28 18:30:31,570 - INFO - Sent client info: adc98f0cc4ea|Linux
+2024-06-28 18:30:33,633 - INFO - Received command: ipconfig
+2024-06-28 18:30:33,633 - INFO - Handling ipconfig
+2024-06-28 18:30:33,635 - INFO - Command output: 172.17.0.5
+
+2024-06-28 18:30:33,635 - INFO - ipconfig result: 172.17.0.5
+
+2024-06-28 18:30:33,635 - INFO - ipconfig handled successfully
+2024-06-28 18:30:50,217 - INFO - Connection closed
+2024-06-28 18:30:50,217 - INFO - Attempting to connect to server...
+2024-06-28 18:30:50,217 - ERROR - Connection error: [Errno 111] Connection refused
+2024-06-28 18:30:54,196 - INFO - Attempting to connect to server...
+2024-06-28 18:30:54,196 - INFO - Connected to server
+2024-06-28 18:30:54,196 - INFO - Sent client info: adc98f0cc4ea|Linux
+2024-06-28 18:30:57,360 - INFO - Received command: ipconfig
+2024-06-28 18:30:57,360 - INFO - Handling ipconfig
+2024-06-28 18:30:57,361 - INFO - Command output: 172.17.0.5
+
+2024-06-28 18:30:57,361 - INFO - ipconfig result: 172.17.0.5
+
+2024-06-28 18:30:57,362 - INFO - ipconfig handled successfully
+2024-06-28 18:31:27,224 - INFO - Connection closed
+2024-06-28 18:31:27,224 - INFO - Attempting to connect to server...
+2024-06-28 18:31:27,224 - ERROR - Connection error: [Errno 111] Connection refused
+2024-06-28 18:31:30,421 - INFO - Attempting to connect to server...
+2024-06-28 18:31:30,421 - INFO - Connected to server
+2024-06-28 18:31:30,422 - INFO - Sent client info: adc98f0cc4ea|Linux
+2024-06-28 18:31:33,144 - INFO - Received command: ipconfig
+2024-06-28 18:31:33,144 - INFO - Handling ipconfig
+2024-06-28 18:31:33,145 - INFO - Command output: 172.17.0.5
+
+2024-06-28 18:31:33,145 - INFO - ipconfig result: 172.17.0.5
+
+2024-06-28 18:31:33,145 - INFO - ipconfig handled successfully
+2024-06-28 18:31:50,543 - INFO - Connection closed
+2024-06-28 18:31:52,530 - INFO - Attempting to connect to server...
+2024-06-28 18:31:52,530 - INFO - Connected to server
+2024-06-28 18:31:52,530 - INFO - Sent client info: adc98f0cc4ea|Linux
+2024-06-28 18:31:54,576 - INFO - Received command: ipconfig
+2024-06-28 18:31:54,576 - INFO - Handling ipconfig
+2024-06-28 18:31:54,577 - INFO - Command output: 172.17.0.5
+
+2024-06-28 18:31:54,578 - INFO - ipconfig result: 172.17.0.5
+
+2024-06-28 18:31:54,578 - INFO - ipconfig handled successfully
+2024-06-28 18:32:39,710 - INFO - Connection closed
+2024-06-28 18:32:42,522 - INFO - Attempting to connect to server...
+2024-06-28 18:32:42,522 - INFO - Connected to server
+2024-06-28 18:32:42,523 - INFO - Sent client info: adc98f0cc4ea|Linux
+2024-06-28 18:32:46,090 - INFO - Received command: ipconfig
+2024-06-28 18:32:46,090 - INFO - Handling ipconfig
+2024-06-28 18:32:46,091 - INFO - Command output: 172.17.0.5
+
+2024-06-28 18:32:46,091 - INFO - ipconfig result: 172.17.0.5
+
+2024-06-28 18:32:46,091 - INFO - ipconfig handled successfully
