@@ -1,8 +1,8 @@
-Pillow
-pyperclip
-opencv-python
-pyscreenshot
-pycryptodome
-pyxhook
-tendo
-
+mss==9.0.1
+Pillow==10.3.0
+pycryptodome==3.20.0
+pyHook==1.5.1
+pyperclip==1.9.0
+pyscreenshot==3.1
+pyxhook==1.0.0
+tendo==0.3.0
