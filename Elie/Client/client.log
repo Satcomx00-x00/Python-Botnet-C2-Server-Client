@@ -648,3 +648,453 @@ if __name__ == "__main__":
     client = ReverseShellClient(host, port)
     client.start()
 
+2024-06-29 13:36:21,649 - INFO - Received command: search test
+2024-06-29 13:36:21,650 - INFO - Handling search for file: test
+2024-06-29 13:36:22,631 - INFO - Command output: /root/.vscode-server/extensions/ms-python.vscode-pylance-2024.6.1/dist/bundled/stubs/django-stubs/test
+/root/.vscode-server/extensions/ms-python.vscode-pylance-2024.6.1/dist/typeshed-fallback/stubs/braintree/braintree/test
+/root/.vscode-server/extensions/ms-python.python-2024.8.1/python_files/lib/jedilsp/jedi/third_party/django-stubs/django-stubs/test
+/root/test
+/usr/local/lib/python3.12/site-packages/ccxt/test
+/usr/local/lib/python3.12/site-packages/tornado/test
+/usr/local/lib/python3.12/site-packages/jedi/third_party/django-stubs/django-stubs/test
+/usr/bin/test
+
+2024-06-29 13:36:29,079 - INFO - Received command: search test2
+2024-06-29 13:36:29,079 - INFO - Handling search for file: test2
+2024-06-29 13:36:29,220 - ERROR - Command error: find: ‘/proc/68476’: No such file or directory
+find: ‘/proc/68480’: No such file or directory
+
+2024-06-29 13:36:29,220 - ERROR - Error listening for commands: Data must be aligned to block boundary in ECB mode
+2024-06-29 13:36:29,220 - INFO - Connection closed
+2024-06-29 13:36:29,220 - INFO - Attempting to connect to server...
+2024-06-29 13:36:29,220 - INFO - Connected to server
+2024-06-29 13:36:29,220 - INFO - Sent client info: adc98f0cc4ea|Linux
+2024-06-29 13:36:36,557 - INFO - Connection closed
+2024-06-29 13:36:38,996 - INFO - Attempting to connect to server...
+2024-06-29 13:36:38,996 - INFO - Connected to server
+2024-06-29 13:36:38,998 - INFO - Sent client info: adc98f0cc4ea|Linux
+2024-06-29 13:36:40,435 - INFO - Received command: search test2
+2024-06-29 13:36:40,435 - INFO - Handling search for file: test2
+2024-06-29 13:36:40,582 - INFO - Command output: 
+2024-06-29 13:36:42,838 - INFO - Received command: search test
+2024-06-29 13:36:42,838 - INFO - Handling search for file: test
+2024-06-29 13:36:42,987 - INFO - Command output: /root/.vscode-server/extensions/ms-python.vscode-pylance-2024.6.1/dist/bundled/stubs/django-stubs/test
+/root/.vscode-server/extensions/ms-python.vscode-pylance-2024.6.1/dist/typeshed-fallback/stubs/braintree/braintree/test
+/root/.vscode-server/extensions/ms-python.python-2024.8.1/python_files/lib/jedilsp/jedi/third_party/django-stubs/django-stubs/test
+/root/test
+/usr/local/lib/python3.12/site-packages/ccxt/test
+/usr/local/lib/python3.12/site-packages/tornado/test
+/usr/local/lib/python3.12/site-packages/jedi/third_party/django-stubs/django-stubs/test
+/usr/bin/test
+
+2024-06-29 13:36:44,727 - INFO - Received command: search test2
+2024-06-29 13:36:44,728 - INFO - Handling search for file: test2
+2024-06-29 13:36:44,872 - INFO - Command output: 
+2024-06-29 13:37:01,782 - INFO - Connection closed
+2024-06-29 13:45:21,762 - INFO - Attempting to connect to server...
+2024-06-29 13:45:21,762 - INFO - Connected to server
+2024-06-29 13:45:21,764 - INFO - Sent client info: adc98f0cc4ea|Linux
+2024-06-29 13:45:27,122 - INFO - Received command: search test
+2024-06-29 13:45:27,123 - INFO - Handling search for file: test
+2024-06-29 13:45:27,268 - INFO - Command output: /root/.vscode-server/extensions/ms-python.vscode-pylance-2024.6.1/dist/bundled/stubs/django-stubs/test
+/root/.vscode-server/extensions/ms-python.vscode-pylance-2024.6.1/dist/typeshed-fallback/stubs/braintree/braintree/test
+/root/.vscode-server/extensions/ms-python.python-2024.8.1/python_files/lib/jedilsp/jedi/third_party/django-stubs/django-stubs/test
+/root/test
+/usr/local/lib/python3.12/site-packages/ccxt/test
+/usr/local/lib/python3.12/site-packages/tornado/test
+/usr/local/lib/python3.12/site-packages/jedi/third_party/django-stubs/django-stubs/test
+/usr/bin/test
+
+2024-06-29 13:46:34,304 - INFO - Connection closed
+2024-06-29 13:46:37,312 - INFO - Attempting to connect to server...
+2024-06-29 13:46:37,312 - INFO - Connected to server
+2024-06-29 13:46:37,314 - INFO - Sent client info: adc98f0cc4ea|Linux
+2024-06-29 13:46:40,618 - INFO - Received command: search test
+2024-06-29 13:46:40,618 - INFO - Handling search for file: test
+2024-06-29 13:46:40,762 - INFO - Command output: /root/.vscode-server/extensions/ms-python.vscode-pylance-2024.6.1/dist/bundled/stubs/django-stubs/test
+/root/.vscode-server/extensions/ms-python.vscode-pylance-2024.6.1/dist/typeshed-fallback/stubs/braintree/braintree/test
+/root/.vscode-server/extensions/ms-python.python-2024.8.1/python_files/lib/jedilsp/jedi/third_party/django-stubs/django-stubs/test
+/root/test
+/usr/local/lib/python3.12/site-packages/ccxt/test
+/usr/local/lib/python3.12/site-packages/tornado/test
+/usr/local/lib/python3.12/site-packages/jedi/third_party/django-stubs/django-stubs/test
+/usr/bin/test
+
+2024-06-29 13:46:43,826 - INFO - Received command: search 2
+2024-06-29 13:46:43,826 - INFO - Handling search for file: 2
+2024-06-29 13:46:43,965 - INFO - Command output: /root/.vscode-server/extensions/ms-python.python-2024.8.1/python_files/lib/jedilsp/jedi/third_party/typeshed/third_party/2
+/root/.vscode-server/extensions/ms-python.python-2024.8.1/python_files/lib/jedilsp/jedi/third_party/typeshed/stdlib/2
+/root/.cache/pip/http-v2/b/4/1/2
+/root/.cache/pip/http-v2/b/0/c/3/2
+/root/.cache/pip/http-v2/4/6/1/f/2
+/root/.cache/pip/http-v2/0/3/8/8/2
+/root/.cache/pip/http-v2/0/3/6/2
+/root/.cache/pip/http-v2/0/1/d/2
+/root/.cache/pip/http-v2/0/1/1/2
+/root/.cache/pip/http-v2/0/1/1/2/2
+/root/.cache/pip/http-v2/0/f/2
+/root/.cache/pip/http-v2/0/2
+/root/.cache/pip/http-v2/c/b/5/2
+/root/.cache/pip/http-v2/c/4/2
+/root/.cache/pip/http-v2/c/8/1/5/2
+/root/.cache/pip/http-v2/c/8/2
+/root/.cache/pip/http-v2/c/e/9/1/2
+/root/.cache/pip/http-v2/c/9/1/f/2
+/root/.cache/pip/http-v2/8/b/2
+/root/.cache/pip/http-v2/8/b/2/4/2
+/root/.cache/pip/http-v2/8/e/2
+/root/.cache/pip/http-v2/8/2
+/root/.cache/pip/http-v2/6/d/f/b/2
+/root/.cache/pip/http-v2/6/2
+/root/.cache/pip/http-v2/6/9/4/e/2
+/root/.cache/pip/http-v2/d/b/8/2
+/root/.cache/pip/http-v2/d/0/2
+/root/.cache/pip/http-v2/3/a/f/2
+/root/.cache/pip/http-v2/3/2
+/root/.cache/pip/http-v2/a/2
+/root/.cache/pip/http-v2/e/4/5/2
+/root/.cache/pip/http-v2/e/0/e/c/2
+/root/.cache/pip/http-v2/e/1/0/2
+/root/.cache/pip/http-v2/e/1/2
+/root/.cache/pip/http-v2/e/1/2/4/2
+/root/.cache/pip/http-v2/e/2
+/root/.cache/pip/http-v2/1/b/1/2
+/root/.cache/pip/http-v2/1/c/1/2
+/root/.cache/pip/http-v2/1/9/2
+/root/.cache/pip/http-v2/1/9/2/8/2
+/root/.cache/pip/http-v2/f/5/2
+/root/.cache/pip/http-v2/f/2
+/root/.cache/pip/http-v2/f/2/2
+/root/.cache/pip/http-v2/5/d/8/6/2
+/root/.cache/pip/http-v2/2
+/root/.cache/pip/http-v2/2/6/7/d/2
+/root/.cache/pip/http-v2/2/f/3/2
+/root/.cache/pip/http-v2/2/2
+/root/.cache/pip/http-v2/9/7/2
+/root/.cache/pip/http-v2/9/7/2/2
+/root/.cache/pip/http-v2/9/4/5/2
+/root/.cache/pip/http-v2/9/0/5/2
+/root/.cache/pip/http-v2/9/3/4/2
+/root/.cache/pip/http-v2/9/1/2
+/root/.cache/pip/http-v2/9/2
+/sys/kernel/irq/2
+/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/VMBUS:00/fd1d2cbd-ce7c-535c-966b-eb5f811c95f0/channels/2
+/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/VMBUS:00/fd1d2cbd-ce7c-535c-966b-eb5f811c95f0/host0/target0:0:0/0:0:0:3/block/sdd/mq/2
+/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/VMBUS:00/fd1d2cbd-ce7c-535c-966b-eb5f811c95f0/host0/target0:0:0/0:0:0:1/block/sdb/mq/2
+/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/VMBUS:00/fd1d2cbd-ce7c-535c-966b-eb5f811c95f0/host0/target0:0:0/0:0:0:2/block/sdc/mq/2
+/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/VMBUS:00/fd1d2cbd-ce7c-535c-966b-eb5f811c95f0/host0/target0:0:0/0:0:0:0/block/sda/mq/2
+/proc/irq/2
+/proc/sys/net/netfilter/nf_log/2
+/proc/1/task/1/fd/2
+/proc/1/task/1/fdinfo/2
+/proc/1/fd/2
+/proc/1/fdinfo/2
+/proc/135/task/135/fd/2
+/proc/135/task/135/fdinfo/2
+/proc/135/fd/2
+/proc/135/fdinfo/2
+/proc/147/task/147/fd/2
+/proc/147/task/147/fdinfo/2
+/proc/147/task/148/fd/2
+/proc/147/task/148/fdinfo/2
+/proc/147/task/149/fd/2
+/proc/147/task/149/fdinfo/2
+/proc/147/task/150/fd/2
+/proc/147/task/150/fdinfo/2
+/proc/147/task/151/fd/2
+/proc/147/task/151/fdinfo/2
+/proc/147/task/152/fd/2
+/proc/147/task/152/fdinfo/2
+/proc/147/task/153/fd/2
+/proc/147/task/153/fdinfo/2
+/proc/147/fd/2
+/proc/147/fdinfo/2
+/proc/154/task/154/fd/2
+/proc/154/task/154/fdinfo/2
+/proc/154/fd/2
+/proc/154/fdinfo/2
+/proc/163/task/163/fd/2
+/proc/163/task/163/fdinfo/2
+/proc/163/task/164/fd/2
+/proc/163/task/164/fdinfo/2
+/proc/163/task/165/fd/2
+/proc/163/task/165/fdinfo/2
+/proc/163/task/166/fd/2
+/proc/163/task/166/fdinfo/2
+/proc/163/task/167/fd/2
+/proc/163/task/167/fdinfo/2
+/proc/163/task/168/fd/2
+/proc/163/task/168/fdinfo/2
+/proc/163/task/172/fd/2
+/proc/163/task/172/fdinfo/2
+/proc/163/task/177/fd/2
+/proc/163/task/177/fdinfo/2
+/proc/163/task/178/fd/2
+/proc/163/task/178/fdinfo/2
+/proc/163/task/179/fd/2
+/proc/163/task/179/fdinfo/2
+/proc/163/task/180/fd/2
+/proc/163/task/180/fdinfo/2
+/proc/163/fd/2
+/proc/163/fdinfo/2
+/proc/253/task/253/fd/2
+/proc/253/task/253/fdinfo/2
+/proc/253/task/254/fd/2
+/proc/253/task/254/fdinfo/2
+/proc/253/task/255/fd/2
+/proc/253/task/255/fdinfo/2
+/proc/253/task/256/fd/2
+/proc/253/task/256/fdinfo/2
+/proc/253/task/257/fd/2
+/proc/253/task/257/fdinfo/2
+/proc/253/task/258/fd/2
+/proc/253/task/258/fdinfo/2
+/proc/253/task/265/fd/2
+/proc/253/task/265/fdinfo/2
+/proc/253/task/267/fd/2
+/proc/253/task/267/fdinfo/2
+/proc/253/task/268/fd/2
+/proc/253/task/268/fdinfo/2
+/proc/253/task/269/fd/2
+/proc/253/task/269/fdinfo/2
+/proc/253/task/270/fd/2
+/proc/253/task/270/fdinfo/2
+/proc/253/task/271/fd/2
+/proc/253/task/271/fdinfo/2
+/proc/253/task/272/fd/2
+/proc/253/task/272/fdinfo/2
+/proc/253/fd/2
+/proc/253/fdinfo/2
+/proc/416/task/416/fd/2
+/proc/416/task/416/fdinfo/2
+/proc/416/task/417/fd/2
+/proc/416/task/417/fdinfo/2
+/proc/416/task/418/fd/2
+/proc/416/task/418/fdinfo/2
+/proc/416/task/419/fd/2
+/proc/416/task/419/fdinfo/2
+/proc/416/task/420/fd/2
+/proc/416/task/420/fdinfo/2
+/proc/416/task/421/fd/2
+/proc/416/task/421/fdinfo/2
+/proc/416/task/422/fd/2
+/proc/416/task/422/fdinfo/2
+/proc/416/task/423/fd/2
+/proc/416/task/423/fdinfo/2
+/proc/416/task/424/fd/2
+/proc/416/task/424/fdinfo/2
+/proc/416/task/425/fd/2
+/proc/416/task/425/fdinfo/2
+/proc/416/task/426/fd/2
+/proc/416/task/426/fdinfo/2
+/proc/416/task/428/fd/2
+/proc/416/task/428/fdinfo/2
+/proc/416/task/1320/fd/2
+/proc/416/task/1320/fdinfo/2
+/proc/416/task/1666/fd/2
+/proc/416/task/1666/fdinfo/2
+/proc/416/task/42118/fd/2
+/proc/416/task/42118/fdinfo/2
+/proc/416/task/42855/fd/2
+/proc/416/task/42855/fdinfo/2
+/proc/416/fd/2
+/proc/416/fdinfo/2
+/proc/427/task/427/fd/2
+/proc/427/task/427/fdinfo/2
+/proc/427/fd/2
+/proc/427/fdinfo/2
+/proc/924/task/924/fd/2
+/proc/924/task/924/fdinfo/2
+/proc/924/fd/2
+/proc/924/fdinfo/2
+/proc/1137/task/1137/fd/2
+/proc/1137/task/1137/fdinfo/2
+/proc/1137/fd/2
+/proc/1137/fdinfo/2
+/proc/1149/task/1149/fd/2
+/proc/1149/task/1149/fdinfo/2
+/proc/1149/task/1150/fd/2
+/proc/1149/task/1150/fdinfo/2
+/proc/1149/task/1151/fd/2
+/proc/1149/task/1151/fdinfo/2
+/proc/1149/task/1152/fd/2
+/proc/1149/task/1152/fdinfo/2
+/proc/1149/task/1153/fd/2
+/proc/1149/task/1153/fdinfo/2
+/proc/1149/task/1154/fd/2
+/proc/1149/task/1154/fdinfo/2
+/proc/1149/task/1155/fd/2
+/proc/1149/task/1155/fdinfo/2
+/proc/1149/fd/2
+/proc/1149/fdinfo/2
+/proc/1162/task/1162/fd/2
+/proc/1162/task/1162/fdinfo/2
+/proc/1162/task/1176/fd/2
+/proc/1162/task/1176/fdinfo/2
+/proc/1162/task/1177/fd/2
+/proc/1162/task/1177/fdinfo/2
+/proc/1162/task/1178/fd/2
+/proc/1162/task/1178/fdinfo/2
+/proc/1162/task/1179/fd/2
+/proc/1162/task/1179/fdinfo/2
+/proc/1162/task/1180/fd/2
+/proc/1162/task/1180/fdinfo/2
+/proc/1162/task/1183/fd/2
+/proc/1162/task/1183/fdinfo/2
+/proc/1162/fd/2
+/proc/1162/fdinfo/2
+/proc/1207/task/1207/fd/2
+/proc/1207/task/1207/fdinfo/2
+/proc/1207/task/1208/fd/2
+/proc/1207/task/1208/fdinfo/2
+/proc/1207/task/1209/fd/2
+/proc/1207/task/1209/fdinfo/2
+/proc/1207/task/1210/fd/2
+/proc/1207/task/1210/fdinfo/2
+/proc/1207/task/1211/fd/2
+/proc/1207/task/1211/fdinfo/2
+/proc/1207/task/1212/fd/2
+/proc/1207/task/1212/fdinfo/2
+/proc/1207/task/1213/fd/2
+/proc/1207/task/1213/fdinfo/2
+/proc/1207/task/1214/fd/2
+/proc/1207/task/1214/fdinfo/2
+/proc/1207/task/1215/fd/2
+/proc/1207/task/1215/fdinfo/2
+/proc/1207/task/1216/fd/2
+/proc/1207/task/1216/fdinfo/2
+/proc/1207/task/1217/fd/2
+/proc/1207/task/1217/fdinfo/2
+/proc/1207/task/1224/fd/2
+/proc/1207/task/1224/fdinfo/2
+/proc/1207/task/1225/fd/2
+/proc/1207/task/1225/fdinfo/2
+/proc/1207/fd/2
+/proc/1207/fdinfo/2
+/proc/1218/task/1218/fd/2
+/proc/1218/task/1218/fdinfo/2
+/proc/1218/task/1226/fd/2
+/proc/1218/task/1226/fdinfo/2
+/proc/1218/task/1227/fd/2
+/proc/1218/task/1227/fdinfo/2
+/proc/1218/task/1228/fd/2
+/proc/1218/task/1228/fdinfo/2
+/proc/1218/task/1229/fd/2
+/proc/1218/task/1229/fdinfo/2
+/proc/1218/task/1230/fd/2
+/proc/1218/task/1230/fdinfo/2
+/proc/1218/task/1231/fd/2
+/proc/1218/task/1231/fdinfo/2
+/proc/1218/fd/2
+/proc/1218/fdinfo/2
+/proc/1239/task/1239/fd/2
+/proc/1239/task/1239/fdinfo/2
+/proc/1239/task/1240/fd/2
+/proc/1239/task/1240/fdinfo/2
+/proc/1239/task/1241/fd/2
+/proc/1239/task/1241/fdinfo/2
+/proc/1239/task/1242/fd/2
+/proc/1239/task/1242/fdinfo/2
+/proc/1239/task/1243/fd/2
+/proc/1239/task/1243/fdinfo/2
+/proc/1239/task/1244/fd/2
+/proc/1239/task/1244/fdinfo/2
+/proc/1239/task/1245/fd/2
+/proc/1239/task/1245/fdinfo/2
+/proc/1239/task/1246/fd/2
+/proc/1239/task/1246/fdinfo/2
+/proc/1239/task/1247/fd/2
+/proc/1239/task/1247/fdinfo/2
+/proc/1239/task/1248/fd/2
+/proc/1239/task/1248/fdinfo/2
+/proc/1239/task/1249/fd/2
+/proc/1239/task/1249/fdinfo/2
+/proc/1239/task/1250/fd/2
+/proc/1239/task/1250/fdinfo/2
+/proc/1239/task/1511/fd/2
+/proc/1239/task/1511/fdinfo/2
+/proc/1239/task/1514/fd/2
+/proc/1239/task/1514/fdinfo/2
+/proc/1239/task/1659/fd/2
+/proc/1239/task/1659/fdinfo/2
+/proc/1239/fd/2
+/proc/1239/fdinfo/2
+/proc/1319/task/1319/fd/2
+/proc/1319/task/1319/fdinfo/2
+/proc/1319/fd/2
+/proc/1319/fdinfo/2
+/proc/1665/task/1665/fd/2
+/proc/1665/task/1665/fdinfo/2
+/proc/1665/fd/2
+/proc/1665/fdinfo/2
+/proc/2185/task/2185/fd/2
+/proc/2185/task/2185/fdinfo/2
+/proc/2185/task/2186/fd/2
+/proc/2185/task/2186/fdinfo/2
+/proc/2185/task/2187/fd/2
+/proc/2185/task/2187/fdinfo/2
+/proc/2185/task/2188/fd/2
+/proc/2185/task/2188/fdinfo/2
+/proc/2185/task/2189/fd/2
+/proc/2185/task/2189/fdinfo/2
+/proc/2185/task/2190/fd/2
+/proc/2185/task/2190/fdinfo/2
+/proc/2185/task/2191/fd/2
+/proc/2185/task/2191/fdinfo/2
+/proc/2185/task/2195/fd/2
+/proc/2185/task/2195/fdinfo/2
+/proc/2185/task/2196/fd/2
+/proc/2185/task/2196/fdinfo/2
+/proc/2185/task/78888/fd/2
+/proc/2185/task/78888/fdinfo/2
+/proc/2185/fd/2
+/proc/2185/fdinfo/2
+/proc/42117/task/42117/fd/2
+/proc/42117/task/42117/fdinfo/2
+/proc/42117/fd/2
+/proc/42117/fdinfo/2
+/proc/42854/task/42854/fd/2
+/proc/42854/task/42854/fdinfo/2
+/proc/42854/fd/2
+/proc/42854/fdinfo/2
+/proc/79146/task/79146/fd/2
+/proc/79146/task/79146/fdinfo/2
+/proc/79146/fd/2
+/proc/79146/fdinfo/2
+/proc/79157/task/79157/fd/2
+/proc/79157/task/79157/fdinfo/2
+/proc/79157/fd/2
+/proc/79157/fdinfo/2
+/proc/79565/task/79565/fd/2
+/proc/79565/task/79565/fdinfo/2
+/proc/79565/task/79571/fd/2
+/proc/79565/task/79571/fdinfo/2
+/proc/79565/fd/2
+/proc/79565/fdinfo/2
+/proc/79570/task/79570/fd/2
+/proc/79570/task/79570/fdinfo/2
+/proc/79570/fd/2
+/proc/79570/fdinfo/2
+/proc/80326/task/80326/fd/2
+/proc/80326/task/80326/fdinfo/2
+/proc/80326/fd/2
+/proc/80326/fdinfo/2
+/proc/80327/task/80327/fd/2
+/proc/80327/task/80327/fdinfo/2
+/proc/80327/fd/2
+/proc/80327/fdinfo/2
+/proc/80328/task/80328/fd/2
+/proc/80328/task/80328/fdinfo/2
+/proc/80328/fd/2
+/proc/80328/fdinfo/2
+/proc/80329/task/80329/fd/2
+/proc/80329/task/80329/fdinfo/2
+/proc/80329/fd/2
+/proc/80329/fdinfo/2
+/usr/local/lib/python3.12/site-packages/jedi/third_party/typeshed/third_party/2
+/usr/local/lib/python3.12/site-packages/jedi/third_party/typeshed/stdlib/2
+/dev/pts/2
+
+2024-06-29 13:46:50,431 - INFO - Received command: search test2
+2024-06-29 13:46:50,431 - INFO - Handling search for file: test2
+2024-06-29 13:46:50,571 - INFO - Command output: 

