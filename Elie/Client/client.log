@@ -1,0 +1,11 @@
+2024-06-30 12:53:11,692 - INFO - Connexion fermée
+2024-06-30 12:53:13,564 - INFO - Tentative de connexion au serveur...
+2024-06-30 12:53:13,564 - INFO - Connecté au serveur
+2024-06-30 12:53:13,565 - INFO - Infos client envoyées: adc98f0cc4ea|Linux
+2024-06-30 12:53:15,512 - INFO - Commande reçue: upload Infected-File.txt
+2024-06-30 12:53:15,512 - INFO - Parts: ['', 'Infected-File.txt']
+2024-06-30 12:53:15,512 - ERROR - Erreur d'écoute des commandes: list index out of range
+2024-06-30 12:53:15,512 - INFO - Connexion fermée
+2024-06-30 12:53:15,512 - INFO - Tentative de connexion au serveur...
+2024-06-30 12:53:15,512 - INFO - Connecté au serveur
+2024-06-30 12:53:15,512 - INFO - Infos client envoyées: adc98f0cc4ea|Linux
